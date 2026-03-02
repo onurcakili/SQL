@@ -1,4 +1,4 @@
-# sqlRepository
+# SQL Repository
 
 SQL ile geliştirdiğim / geliştirmekte olduğum projeler hakkında fikir sahibi olmak için bu repository kurulmuştur.  
 
