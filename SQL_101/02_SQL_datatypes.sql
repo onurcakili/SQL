@@ -1,22 +1,6 @@
-/******************************************************************************
-*
-* SQL DATA TYPES (VERİ TİPLERİ)
-* Teknik Doküman
-*
-* Hedef Kitle:
-* - Veri Analistleri
-* - BI Uzmanları
-* - Data Scientist'ler
-* - SQL Developer'lar
-*
-******************************************************************************/
+-----------------------------------------------------------------------------------------------
 
-
--- 1. GİRİŞ
-------------------------------------------------------------------------------------------------
-
--- Veri Tipi (Data Type), bir kolonun hangi tür veriyi saklayacağını belirleyen
--- veri tabanı nesnesidir.
+-- Veri Tipi (Data Type), bir kolonun hangi tür veriyi saklayacağını belirleyen veri tabanı nesnesidir.
 
 -- Veri tipi seçimi:
 -- • Performansı etkiler
@@ -171,9 +155,9 @@
 -- Büyük Unicode metin.
 -- Depolama : 2 GB
 
-----------------
+--------------------------------------------------------------------------------
 -- 5. DATE & TIME DATA TYPES
-----------------
+--------------------------------------------------------------------------------
 
 ----------------
 -- 5.1 DATE
@@ -200,14 +184,6 @@
 -- 1753-01-01 → 9999-12-31
 
 ----------------
--- 5.4 DATETIME2
-----------------
-
--- Gelişmiş datetime
--- Depolama : 6–8 Byte
--- 0001-01-01 → 9999-12-31
-
-----------------
 -- 5.5 SMALLDATETIME
 ----------------
 
@@ -223,9 +199,9 @@
 -- Depolama : 10 Byte
 -- UTC offset içerir
 
-----------------
+--------------------------------------------------------------------------------
 -- 6. BOOLEAN DATA TYPES
-----------------
+--------------------------------------------------------------------------------
 
 ----------------
 -- 6.1 BIT
@@ -236,9 +212,9 @@
 -- Depolama : 1 bit (mantıksal olarak 1 byte bloklar halinde)
 -- Aktif/Pasif
 
-----------------
+--------------------------------------------------------------------------------
 -- 7. BINARY DATA TYPES
-----------------
+--------------------------------------------------------------------------------
 
 ----------------
 -- 7.1 BINARY
@@ -288,27 +264,3 @@
 
 -- MSSQL'de native değil
 -- NVARCHAR(MAX) içinde tutulur
-
-----------------
--- 9. BEST PRACTICES (VERİ ANALİSTİ)
-----------------
-
--- ID alanları      : INT / BIGINT
--- Para             : DECIMAL(18,2)
--- Tarih            : DATETIME2
--- Boolean          : BIT
--- Kısa metin       : VARCHAR
--- Uzun metin       : NVARCHAR(MAX)
--- Dosya            : VARBINARY(MAX)
-
-----------------
--- 10. SONUÇ
-----------------
-
--- Doğru veri tipi seçimi:
--- • Performansı artırır
--- • Depolamayı optimize eder
--- • Veri kalitesini yükseltir
-
--- KURAL:
--- En küçük + en doğru + en anlamlı veri tipini seç.
