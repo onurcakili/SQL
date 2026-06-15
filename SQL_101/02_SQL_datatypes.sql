@@ -9,15 +9,8 @@
 -- • Analitik doğruluğu etkiler
 
 
--- 2. VERİ TİPİ KATEGORİLERİ
+-- VERİ TİPİ KATEGORİLERİ
 ------------------------------------------------------------------------------------------------
-
--- 2.1 Numeric Data Types
--- 2.2 Character Data Types
--- 2.3 Date & Time Data Types
--- 2.4 Boolean Data Types
--- 2.5 Binary Data Types
--- 2.6 Special Purpose Data Types
 
 
 -- 3. NUMERIC DATA TYPES
@@ -94,17 +87,10 @@
 -- FLOAT(25-53) : 8 Byte
 -- Bilimsel hesaplamalar
 
-----------------
--- 3.8 REAL
-----------------
 
--- FLOAT(24) eşdeğeridir.
--- Aralık : ±3.40E+38
--- Depolama : 4 Byte
-
-----------------
+--------------------------------------------------------------------------------
 -- 4. CHARACTER DATA TYPES
-----------------
+--------------------------------------------------------------------------------
 
 ----------------
 -- 4.1 CHAR
@@ -246,7 +232,7 @@
 -- 8.1 UNIQUEIDENTIFIER
 ----------------
 
--- GUID veri tipi
+-- GUID veri tipi (Global Unique Identifier)
 -- Depolama : 16 Byte
 -- Global unique ID
 
