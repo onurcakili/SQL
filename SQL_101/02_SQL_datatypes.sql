@@ -77,7 +77,7 @@
 -- - Sınırlı aralığa sahip sayısal bilgiler
 --
 -- Örnek:
--- Bir ürünün stok uyarı limiti veya çalışan deneyim yılı gibi değerler
+-- Bir ürünün stok uyarı limiti 
 -- SMALLINT ile saklanabilir.
 
 
@@ -88,7 +88,7 @@
 -- INT, SQL Server'da genel amaçlı tam sayı değerleri için en sık kullanılan
 -- veri tiplerinden biridir.
 --
--- Değer aralığı  : -2,147,483,648 - 2,147,483,647
+-- Değer aralığı  : -2,147,483,648 - 2,147,483,647  (2.14 milyar civarı)
 -- Depolama alanı : 4 Byte
 --
 -- Geniş değer aralığı sunduğu için kimlik alanları, sayaçlar ve birçok standart
@@ -112,7 +112,7 @@
 -- BIGINT, çok büyük tam sayıların saklanması gereken durumlarda kullanılan
 -- veri tipidir.
 --
--- Değer aralığı  : -9,223,372,036,854,775,808 -
+-- Değer aralığı  : -9,223,372,036,854,775,808 (-9.22 kentilyon civarı)
 --                  9,223,372,036,854,775,807
 -- Depolama alanı : 8 Byte
 --
@@ -204,7 +204,7 @@
 -- DECIMAL kadar güçlü değildir.
 --
 -- Değer aralığı:
--- Yaklaşık ±1.79E+308
+-- Yaklaşık ±1.79E+308 (1.79 × 10³⁰⁸)
 --
 -- Depolama alanı:
 -- FLOAT(1-24)   : 4 Byte
@@ -480,11 +480,11 @@
 
 
 -----------------------------------------------------------------------------------------------
--- 4. BOOLEAN DATA TYPES
+-- 4. BOOLEAN DATA TYPES (true / false)
 -----------------------------------------------------------------------------------------------
 
 ----------------
--- 4.1 BIT
+-- 4.1 BIT (0, 1, NULL)
 ----------------
 
 -- BIT, mantıksal değerleri saklamak için kullanılan veri tipidir.
@@ -581,6 +581,17 @@
 -- çözümleri de değerlendirilmelidir.
 
 
+
+-- BOOLEAN / BIT / BINARY farkları
+
+-- BOOLEAN → Mantıksal kavram → true / false
+-- BIT     → SQL Server’da boolean benzeri veri saklamak için kullanılır → 0 / 1 / NULL
+-- BINARY  → Ham ikili veri saklamak için kullanılır → dosya, hash, şifreli veri vb.
+
+-- Ham ikili veri saklamak, veriyi insanın doğrudan okuyabileceği biçimde değil, bilgisayarın işlediği düşük seviyeli byte formatında saklamaktır.
+-- Basit benzetme → Metin veri = "Onur"
+
+
 -----------------------------------------------------------------------------------------------
 -- 6. SPECIAL PURPOSE DATA TYPES
 -----------------------------------------------------------------------------------------------
@@ -617,12 +628,11 @@
 -- 6.2 XML
 ----------------
 
--- XML, XML formatındaki yapılandırılmış verileri saklamak için kullanılan özel
--- amaçlı veri tipidir.
+-- XML, “Extensible Markup Language” ifadesinin kısaltmasıdır Türkçeye "Genişletilebilir İşaretleme Dili" olarak çevrilir.
+-- XML, veriyi etiketler kullanarak düzenli ve hiyerarşik biçimde saklamak veya sistemler arasında
+-- taşımak için kullanılan metin tabanlı bir veri formatıdır. HTML görünümü tanımlarken, XML verinin yapısını ve anlamını tanımlar.
 --
--- XML, hiyerarşik veri yapılarının saklanmasına olanak tanır. SQL Server XML
--- verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına
--- destek verir.
+-- SQL Server XML verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına destek verir.
 --
 -- Örnek kullanım alanları:
 -- - Konfigürasyon verileri
@@ -638,6 +648,17 @@
 ----------------
 -- 6.3 JSON
 ----------------
+
+-- JSON, “JavaScript Object Notation” ifadesinin kısaltmasıdır.
+-- JSON, veriyi anahtar-değer çiftleri halinde saklamak ve sistemler arasında taşımak için kullanılan metin tabanlı bir veri formatıdır.
+-- Özellikle web uygulamalarında, API cevaplarında ve yapılandırma dosyalarında yaygın olarak kullanılır.
+-- Basit örnek:
+
+-- {
+--   "id": 1,
+--   "name": "Onur",
+--   "city": "Istanbul"
+-- }
 
 -- SQL Server'da JSON için ayrı bir native veri tipi bulunmaz. JSON verileri
 -- genellikle NVARCHAR veya NVARCHAR(MAX) veri tipi içinde saklanır.
