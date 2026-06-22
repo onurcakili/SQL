@@ -1,109 +1,176 @@
 ---------------------------------------------------------------------------
--- SQL & Veritabanına Giriş - 101
+-- SQL ve Veritabanlarına Giriş - 101
 ---------------------------------------------------------------------------
 
 -- 1. VERİ NEDİR VE NEDEN YÖNETİLMELİDİR?
 --
--- Günümüz dijital sistemlerinde veri, sistemlerin en temel bileşenidir.
--- Ancak ham veri tek başına anlamlı değildir; organize edilmediği sürece:
--- - tutarsızlık oluşur
--- - tekrarlar artar
--- - erişim zorlaşır
--- - analiz yapılamaz hale gelir
+-- Günümüz dijital sistemlerinde veri, karar alma süreçlerinin, operasyonel
+-- işleyişin ve analitik uygulamaların temel bileşenlerinden biridir. Ancak
+-- ham veri, tek başına anlamlı ve kullanılabilir bir yapı sunmaz. Verinin
+-- belirli bir sistematik içinde düzenlenmemesi durumunda tutarsızlıklar,
+-- tekrar eden kayıtlar, erişim güçlükleri ve analiz süreçlerinde verimsizlikler
+-- ortaya çıkabilir.
 --
--- Bu nedenle verinin yapılandırılmış ve yönetilebilir bir sistem içinde saklanması gerekir.
+-- Bu nedenle verinin yapılandırılmış, güvenilir, erişilebilir ve yönetilebilir
+-- bir sistem içerisinde saklanması gerekir. Etkili veri yönetimi; veri
+-- bütünlüğünün korunmasını, bilgiye hızlı erişimi ve kurumsal karar süreçlerinin
+-- daha sağlıklı biçimde yürütülmesini sağlar.
 
 
 -- 2. VERİTABANI (DATABASE) NEDİR?
 --
--- Veritabanı, ilişkili verilerin mantıksal bir model içinde organize edilerek saklandığı yapıdır.
+-- Veritabanı, birbiriyle ilişkili verilerin belirli bir mantıksal model
+-- çerçevesinde organize edilerek saklandığı yapıdır. Veritabanları, verinin
+-- düzenli, tutarlı ve erişilebilir biçimde yönetilmesine olanak tanır.
 --
--- İlişkisel modelde veri:
--- - tablolar (relations)
--- - satırlar (tuples / records)
--- - sütunlar (attributes / fields)
--- şeklinde temsil edilir.
+-- İlişkisel veritabanı modelinde veri genellikle aşağıdaki yapılarla temsil edilir:
 --
--- Temel amaç:
--- Veriyi tekrar etmeden, tutarlı ve erişilebilir şekilde saklamaktır.
+-- - Tablolar (relations)
+-- - Satırlar / kayıtlar (tuples / records)
+-- - Sütunlar / alanlar (attributes / fields)
+--
+-- Veritabanlarının temel amacı, veriyi gereksiz tekrarları azaltarak, tutarlı
+-- ve güvenilir biçimde saklamak; aynı zamanda kullanıcıların ihtiyaç duyduğu
+-- bilgilere etkin şekilde erişmesini sağlamaktır.
 
 
 -- 3. VERİTABANI YÖNETİM SİSTEMİ (DBMS)
 --
--- DBMS, veritabanını doğrudan yöneten yazılım katmanıdır.
+-- Veritabanı Yönetim Sistemi (Database Management System - DBMS), veritabanının
+-- oluşturulmasını, yönetilmesini, sorgulanmasını ve güvenli biçimde kullanılmasını
+-- sağlayan yazılım katmanıdır.
 --
--- Görevleri:
--- - Veri oluşturma ve saklama
--- - Veri sorgulama ve güncelleme
--- - Eşzamanlı kullanıcı yönetimi (concurrency)
--- - Güvenlik ve yetkilendirme
--- - Veri bütünlüğünü sağlama
+-- DBMS'in temel görevleri şunlardır:
 --
--- DBMS, kullanıcı ile fiziksel veri arasında bir soyutlama katmanı oluşturur.
+-- - Verinin oluşturulması ve saklanması
+-- - Verinin sorgulanması, güncellenmesi ve silinmesi
+-- - Birden fazla kullanıcının eşzamanlı erişiminin yönetilmesi
+-- - Güvenlik ve yetkilendirme mekanizmalarının uygulanması
+-- - Veri bütünlüğünün ve tutarlılığının korunması
+-- - Yedekleme, kurtarma ve işlem yönetimi süreçlerinin desteklenmesi
+--
+-- DBMS, kullanıcılar ile fiziksel veri depolama yapısı arasında bir soyutlama
+-- katmanı oluşturarak verinin daha güvenli, düzenli ve kontrollü biçimde
+-- yönetilmesini sağlar.
 
 
--- 4. İLİŞKİSEL VERİTABANI (RDBMS)
+-- 4. İLİŞKİSEL VERİTABANI YÖNETİM SİSTEMİ (RDBMS)
 --
--- RDBMS, verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler kuran DBMS türüdür.
+-- İlişkisel Veritabanı Yönetim Sistemi (Relational Database Management System -
+-- RDBMS), verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler
+-- kurulmasını sağlayan DBMS türüdür.
 --
--- İlişkiler genellikle:
--- - Primary Key (PK)
--- - Foreign Key (FK)
--- ile sağlanır.
+-- İlişkisel modelde tablolar arasındaki bağlantılar genellikle aşağıdaki
+-- anahtar yapılarıyla kurulur:
 --
--- Amaç:
--- - Veri tekrarını azaltmak (normalization)
--- - Veri tutarlılığını sağlamak (integrity)
--- - Güvenilir veri ilişkileri kurmak
+-- - Primary Key (PK): Bir tablodaki kayıtları benzersiz biçimde tanımlar.
+-- - Foreign Key (FK): Bir tablonun başka bir tabloyla ilişki kurmasını sağlar.
+--
+-- RDBMS kullanımının temel amaçları şunlardır:
+--
+-- - Veri tekrarını azaltmak
+-- - Veri tutarlılığını sağlamak
+-- - Veriler arasında güvenilir ilişkiler kurmak
+-- - Veri bütünlüğünü korumak
+-- - Sorgulama ve raporlama süreçlerini daha verimli hâle getirmek
 
 
--- 5. CLIENT – SERVER MİMARİSİ
+-- 5. CLIENT-SERVER MİMARİSİ
 --
--- Veritabanı sistemleri genellikle client-server mimarisi ile çalışır:
+-- Veritabanı sistemleri çoğunlukla client-server mimarisiyle çalışır. Bu
+-- mimaride istemci ve sunucu arasında görev paylaşımı bulunur.
 --
 -- Client (İstemci):
--- - Veri talep eden taraf
+-- Veriye erişmek, sorgu göndermek veya işlem talep etmek isteyen taraftır.
+-- Uygulamalar, raporlama araçları veya kullanıcı arayüzleri istemci rolünde
+-- çalışabilir.
 --
 -- Server (Sunucu):
--- - Veriyi işleyen ve döndüren taraf
+-- Veritabanını barındıran, istemciden gelen sorguları işleyen ve sonuçları
+-- istemciye geri döndüren taraftır.
 --
--- İşleyiş:
--- Client SQL sorgusu gönderir → Server işler → Sonuç geri döner
+-- Temel işleyiş şu şekildedir:
 --
--- Avantajlar:
--- - merkezi kontrol
--- - güvenlik
--- - ölçeklenebilirlik
+-- İstemci SQL sorgusu gönderir → Sunucu sorguyu işler → Sonuç istemciye döner
+--
+-- Client-server mimarisinin başlıca avantajları şunlardır:
+--
+-- - Merkezi veri yönetimi
+-- - Güvenlik ve erişim kontrolü
+-- - Ölçeklenebilirlik
+-- - Kaynakların daha verimli kullanılması
+-- - Çok kullanıcılı çalışma ortamlarının desteklenmesi
 
 
 -- 6. DBMS VE SQL İLİŞKİSİ
 --
--- SQL, DBMS üzerinde çalışan standart sorgu dilidir.
+-- SQL, ilişkisel veritabanı yönetim sistemleri üzerinde veri tanımlama,
+-- sorgulama, güncelleme ve yönetim işlemlerini gerçekleştirmek için kullanılan
+-- standart sorgu dilidir.
 --
--- SQL tek başına bir yazılım değildir.
+-- SQL tek başına bir veritabanı yazılımı değildir. SQL, DBMS'e hangi işlemin
+-- yapılacağını ifade eder; DBMS ise bu işlemin nasıl gerçekleştirileceğini
+-- belirler ve uygular.
 --
--- İlişki:
--- - SQL → ne yapılacağını söyler
--- - DBMS → nasıl yapılacağını uygular
+-- Bu ilişki şu şekilde özetlenebilir:
+--
+-- - SQL: Yapılacak işlemi tanımlar.
+-- - DBMS: Tanımlanan işlemi yürütür ve sonucu üretir.
+--
+-- Örneğin kullanıcı bir SELECT sorgusu yazdığında, SQL hangi verinin
+-- getirileceğini belirtir. DBMS ise ilgili verinin nerede bulunduğunu, nasıl
+-- okunacağını ve kullanıcıya nasıl döndürüleceğini yönetir.
 
 
 -- 7. SQL NEDİR?
 --
--- SQL (Structured Query Language), ilişkisel veritabanlarında veri yönetimi için kullanılan standart dildir.
+-- SQL (Structured Query Language), ilişkisel veritabanlarında veri tanımlama,
+-- veri sorgulama, veri işleme ve erişim kontrolü amacıyla kullanılan standart
+-- bir dildir.
 --
--- SQL kategorileri:
--- - DDL (Data Definition Language) → CREATE, ALTER, DROP
--- - DML (Data Manipulation Language) → INSERT, UPDATE, DELETE
--- - DQL (Data Query Language) → SELECT
--- - DCL / TCL → yetki ve işlem kontrolü
+-- SQL, farklı işlem türlerine göre çeşitli alt kategorilere ayrılır:
+--
+-- - DDL (Data Definition Language):
+--   Veritabanı nesnelerini tanımlamak ve düzenlemek için kullanılır.
+--   Örnek komutlar: CREATE, ALTER, DROP
+--
+-- - DML (Data Manipulation Language):
+--   Veriler üzerinde ekleme, güncelleme ve silme işlemleri yapmak için kullanılır.
+--   Örnek komutlar: INSERT, UPDATE, DELETE
+--
+-- - DQL (Data Query Language):
+--   Veritabanından veri sorgulamak için kullanılır.
+--   Örnek komut: SELECT
+--
+-- - DCL (Data Control Language):
+--   Yetkilendirme ve erişim kontrolü işlemleri için kullanılır.
+--   Örnek komutlar: GRANT, REVOKE
+--
+-- - TCL (Transaction Control Language):
+--   İşlem bütünlüğünü yönetmek için kullanılır.
+--   Örnek komutlar: COMMIT, ROLLBACK, SAVEPOINT
 
 
 -- 8. MSSQL (MICROSOFT SQL SERVER)
 --
--- MSSQL, Microsoft tarafından geliştirilen bir RDBMS sistemidir.
+-- MSSQL, Microsoft tarafından geliştirilen ilişkisel veritabanı yönetim
+-- sistemidir. Kurumsal düzeyde veri saklama, sorgulama, güvenlik, işlem yönetimi
+-- ve raporlama ihtiyaçlarını karşılamak üzere yaygın biçimde kullanılmaktadır.
 --
--- Özellikleri:
--- - T-SQL (Transact-SQL) kullanır
--- - transaction yönetimi destekler
--- - kurumsal ölçekli veri yönetimi sağlar
--- - güvenlik ve performans mekanizmaları içerir
+-- Microsoft SQL Server, SQL dilinin Microsoft tarafından genişletilmiş biçimi
+-- olan T-SQL (Transact-SQL) dilini kullanır. T-SQL, standart SQL komutlarına ek
+-- olarak değişken tanımlama, koşullu ifadeler, döngüler, hata yönetimi ve
+-- prosedürel programlama özellikleri sunar.
+--
+-- MSSQL'in temel özellikleri şunlardır:
+--
+-- - T-SQL desteği sağlar.
+-- - Transaction yönetimini destekler.
+-- - Kurumsal ölçekli veri yönetimi imkânı sunar.
+-- - Güvenlik, yetkilendirme ve erişim kontrolü mekanizmaları içerir.
+-- - Performans optimizasyonu ve indeksleme özellikleri sağlar.
+-- - Yedekleme, kurtarma ve yüksek erişilebilirlik senaryolarını destekler.
+--
+-- Bu özellikleriyle MSSQL, hem operasyonel sistemlerde hem de raporlama,
+-- analitik ve iş zekâsı uygulamalarında yaygın olarak kullanılan güçlü bir
+-- veritabanı yönetim sistemidir.
