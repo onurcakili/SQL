@@ -4,24 +4,22 @@
 
 -- 1. VERİ NEDİR VE NEDEN YÖNETİLMELİDİR?
 --
--- Günümüz dijital sistemlerinde veri, karar alma süreçlerinin, operasyonel
--- işleyişin ve analitik uygulamaların temel bileşenlerinden biridir. Ancak
--- ham veri, tek başına anlamlı ve kullanılabilir bir yapı sunmaz. Verinin
--- belirli bir sistematik içinde düzenlenmemesi durumunda tutarsızlıklar,
--- tekrar eden kayıtlar, erişim güçlükleri ve analiz süreçlerinde verimsizlikler
--- ortaya çıkabilir.
+-- Günümüz dijital sistemlerinde veri, karar alma süreçlerinin,
+-- operasyonel işleyişin ve analitik uygulamaların temel bileşenlerinden biridir.
+-- Ancak ham veri, tek başına anlamlı ve kullanılabilir bir yapı sunmaz.
+-- Verinin belirli bir sistematik içinde düzenlenmemesi durumunda tutarsızlıklar, tekrar eden kayıtlar,
+-- erişim güçlükleri ve analiz süreçlerinde verimsizlikler ortaya çıkabilir.
 --
--- Bu nedenle verinin yapılandırılmış, güvenilir, erişilebilir ve yönetilebilir
--- bir sistem içerisinde saklanması gerekir. Etkili veri yönetimi; veri
--- bütünlüğünün korunmasını, bilgiye hızlı erişimi ve kurumsal karar süreçlerinin
--- daha sağlıklı biçimde yürütülmesini sağlar.
+-- Bu nedenle verinin yapılandırılmış, güvenilir,
+-- erişilebilir ve yönetilebilir bir sistem içerisinde saklanması gerekir.
+-- Etkili veri yönetimi; veri bütünlüğünün korunmasını,
+-- bilgiye hızlı erişimi ve kurumsal karar süreçlerinin daha sağlıklı biçimde yürütülmesini sağlar.
 
 
 -- 2. VERİTABANI (DATABASE) NEDİR?
 --
--- Veritabanı, birbiriyle ilişkili verilerin belirli bir mantıksal model
--- çerçevesinde organize edilerek saklandığı yapıdır. Veritabanları, verinin
--- düzenli, tutarlı ve erişilebilir biçimde yönetilmesine olanak tanır.
+-- Veritabanı, birbiriyle ilişkili verilerin belirli bir mantıksal model çerçevesinde organize edilerek saklandığı yapıdır.
+-- Veritabanları, verinin düzenli, tutarlı ve erişilebilir biçimde yönetilmesine olanak tanır.
 --
 -- İlişkisel veritabanı modelinde veri genellikle aşağıdaki yapılarla temsil edilir:
 --
@@ -29,16 +27,14 @@
 -- - Satırlar / kayıtlar (tuples / records)
 -- - Sütunlar / alanlar (attributes / fields)
 --
--- Veritabanlarının temel amacı, veriyi gereksiz tekrarları azaltarak, tutarlı
--- ve güvenilir biçimde saklamak; aynı zamanda kullanıcıların ihtiyaç duyduğu
--- bilgilere etkin şekilde erişmesini sağlamaktır.
+-- Veritabanlarının temel amacı, veriyi gereksiz tekrarları azaltarak,
+-- tutarlı ve güvenilir biçimde saklamak; aynı zamanda kullanıcıların ihtiyaç duyduğu bilgilere etkin şekilde erişmesini sağlamaktır.
 
 
 -- 3. VERİTABANI YÖNETİM SİSTEMİ (DBMS)
 --
--- Veritabanı Yönetim Sistemi (Database Management System - DBMS), veritabanının
--- oluşturulmasını, yönetilmesini, sorgulanmasını ve güvenli biçimde kullanılmasını
--- sağlayan yazılım katmanıdır.
+-- Veritabanı Yönetim Sistemi (Database Management System - DBMS), veritabanının oluşturulmasını,
+-- yönetilmesini, sorgulanmasını ve güvenli biçimde kullanılmasını sağlayan yazılım katmanıdır.
 --
 -- DBMS'in temel görevleri şunlardır:
 --
@@ -49,16 +45,15 @@
 -- - Veri bütünlüğünün ve tutarlılığının korunması
 -- - Yedekleme, kurtarma ve işlem yönetimi süreçlerinin desteklenmesi
 --
--- DBMS, kullanıcılar ile fiziksel veri depolama yapısı arasında bir soyutlama
--- katmanı oluşturarak verinin daha güvenli, düzenli ve kontrollü biçimde
--- yönetilmesini sağlar.
+-- DBMS, kullanıcılar ile fiziksel veri depolama yapısı arasında bir soyutlama katmanı oluşturarak
+-- verinin daha güvenli, düzenli ve kontrollü biçimde yönetilmesini sağlar.
 
 
 -- 4. İLİŞKİSEL VERİTABANI YÖNETİM SİSTEMİ (RDBMS)
 --
--- İlişkisel Veritabanı Yönetim Sistemi (Relational Database Management System -
--- RDBMS), verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler
--- kurulmasını sağlayan DBMS türüdür.
+-- İlişkisel Veritabanı Yönetim Sistemi (Relational Database Management System - RDBMS),
+-- verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler kurulmasını sağlayan DBMS
+-- türüdür.
 --
 -- İlişkisel modelde tablolar arasındaki bağlantılar genellikle aşağıdaki
 -- anahtar yapılarıyla kurulur:
@@ -77,17 +72,15 @@
 
 -- 5. CLIENT-SERVER MİMARİSİ
 --
--- Veritabanı sistemleri çoğunlukla client-server mimarisiyle çalışır. Bu
--- mimaride istemci ve sunucu arasında görev paylaşımı bulunur.
+-- Veritabanı sistemleri çoğunlukla client-server mimarisiyle çalışır.
+-- Bu mimaride istemci ve sunucu arasında görev paylaşımı bulunur.
 --
 -- Client (İstemci):
 -- Veriye erişmek, sorgu göndermek veya işlem talep etmek isteyen taraftır.
--- Uygulamalar, raporlama araçları veya kullanıcı arayüzleri istemci rolünde
--- çalışabilir.
+-- Uygulamalar, raporlama araçları veya kullanıcı arayüzleri istemci rolünde çalışabilir.
 --
 -- Server (Sunucu):
--- Veritabanını barındıran, istemciden gelen sorguları işleyen ve sonuçları
--- istemciye geri döndüren taraftır.
+-- Veritabanını barındıran, istemciden gelen sorguları işleyen ve sonuçları istemciye geri döndüren taraftır.
 --
 -- Temel işleyiş şu şekildedir:
 --
@@ -104,29 +97,27 @@
 
 -- 6. DBMS VE SQL İLİŞKİSİ
 --
--- SQL, ilişkisel veritabanı yönetim sistemleri üzerinde veri tanımlama,
--- sorgulama, güncelleme ve yönetim işlemlerini gerçekleştirmek için kullanılan
--- standart sorgu dilidir.
+-- SQL, ilişkisel veritabanı yönetim sistemleri üzerinde veri tanımlama, sorgulama,
+-- güncelleme ve yönetim işlemlerini gerçekleştirmek için kullanılan standart sorgu dilidir.
 --
--- SQL tek başına bir veritabanı yazılımı değildir. SQL, DBMS'e hangi işlemin
--- yapılacağını ifade eder; DBMS ise bu işlemin nasıl gerçekleştirileceğini
--- belirler ve uygular.
+-- SQL tek başına bir veritabanı yazılımı değildir.
+-- SQL, DBMS'e hangi işlemin yapılacağını ifade eder;
+-- DBMS ise bu işlemin nasıl gerçekleştirileceğini belirler ve uygular.
 --
 -- Bu ilişki şu şekilde özetlenebilir:
 --
 -- - SQL: Yapılacak işlemi tanımlar.
 -- - DBMS: Tanımlanan işlemi yürütür ve sonucu üretir.
 --
--- Örneğin kullanıcı bir SELECT sorgusu yazdığında, SQL hangi verinin
--- getirileceğini belirtir. DBMS ise ilgili verinin nerede bulunduğunu, nasıl
--- okunacağını ve kullanıcıya nasıl döndürüleceğini yönetir.
+-- Örneğin kullanıcı bir SELECT sorgusu yazdığında, SQL hangi verinin getirileceğini belirtir.
+-- DBMS ise ilgili verinin nerede bulunduğunu, nasıl okunacağını ve kullanıcıya nasıl döndürüleceğini
+-- yönetir.
 
 
 -- 7. SQL NEDİR?
 --
--- SQL (Structured Query Language), ilişkisel veritabanlarında veri tanımlama,
--- veri sorgulama, veri işleme ve erişim kontrolü amacıyla kullanılan standart
--- bir dildir.
+-- SQL (Structured Query Language), ilişkisel veritabanlarında veri tanımlama, veri sorgulama,
+-- veri işleme ve erişim kontrolü amacıyla kullanılan standart bir dildir.
 --
 -- SQL, farklı işlem türlerine göre çeşitli alt kategorilere ayrılır:
 --
@@ -153,14 +144,14 @@
 
 -- 8. MSSQL (MICROSOFT SQL SERVER)
 --
--- MSSQL, Microsoft tarafından geliştirilen ilişkisel veritabanı yönetim
--- sistemidir. Kurumsal düzeyde veri saklama, sorgulama, güvenlik, işlem yönetimi
--- ve raporlama ihtiyaçlarını karşılamak üzere yaygın biçimde kullanılmaktadır.
+-- MSSQL, Microsoft tarafından geliştirilen ilişkisel veritabanı yönetim sistemidir.
+-- Kurumsal düzeyde veri saklama, sorgulama, güvenlik,
+-- işlem yönetimi ve raporlama ihtiyaçlarını karşılamak üzere yaygın biçimde kullanılmaktadır.
 --
--- Microsoft SQL Server, SQL dilinin Microsoft tarafından genişletilmiş biçimi
--- olan T-SQL (Transact-SQL) dilini kullanır. T-SQL, standart SQL komutlarına ek
--- olarak değişken tanımlama, koşullu ifadeler, döngüler, hata yönetimi ve
--- prosedürel programlama özellikleri sunar.
+-- Microsoft SQL Server, SQL dilinin Microsoft tarafından genişletilmiş biçimi olan T-SQL
+-- (Transact-SQL) dilini kullanır.
+-- T-SQL, standart SQL komutlarına ek olarak değişken tanımlama, koşullu ifadeler, döngüler,
+-- hata yönetimi ve prosedürel programlama özellikleri sunar.
 --
 -- MSSQL'in temel özellikleri şunlardır:
 --
@@ -172,5 +163,5 @@
 -- - Yedekleme, kurtarma ve yüksek erişilebilirlik senaryolarını destekler.
 --
 -- Bu özellikleriyle MSSQL, hem operasyonel sistemlerde hem de raporlama,
--- analitik ve iş zekâsı uygulamalarında yaygın olarak kullanılan güçlü bir
--- veritabanı yönetim sistemidir.
+-- analitik ve iş zekâsı uygulamalarında yaygın olarak kullanılan güçlü bir veritabanı yönetim
+-- sistemidir.
