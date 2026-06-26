@@ -239,13 +239,17 @@ WHERE AGE BETWEEN 20 AND 30;
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE BETWEEN '19900101' AND '19931231'
-ORDER BY BIRTHDATE;
+ORDER BY BIRTHDATE asc;
 
 -- Sorgu sonucunu BIRTHDATE kolonuna göre büyükten küçüğe sırala
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE BETWEEN '19900101' AND '19931231'
 ORDER BY BIRTHDATE DESC;
+
+-- ASC (Ascending)   = Kucukten buyuge sıralama yapar.
+-- DESC (Descending) = Buyukten kucuge sıralama yapar.
+
 
 ------------------------------------------------------------------------------------------------
 -- LIKE, NOT LIKE, IN, NOT IN KULLANIMI
