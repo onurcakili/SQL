@@ -6,7 +6,6 @@
 -- 2. DML (Data Manipulation Language)    : INSERT, UPDATE, DELETE
 -- 3. DQL (Data Query Language)           : SELECT
 -- 4. DCL (Data Control Language)         : GRANT, REVOKE
--- 5. TCL (Transaction Control Language)  : BEGIN TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT
 
 ------------------------------------------------------------------------------------------------
 -- 1. DDL (DATA DEFINITION LANGUAGE) KOMUTLARI
@@ -122,12 +121,12 @@ SET AGE = DATEDIFF(YEAR, BIRTHDATE, GETDATE());
 -- GENDER değeri M olan kayıtları MALE olarak güncelle
 UPDATE CUSTOMERS
 SET GENDER = 'MALE'
-WHERE GENDER IN ('M');
+WHERE GENDER = ('M');
 
 -- GENDER değeri F olan kayıtları FEMALE olarak güncelle
 UPDATE CUSTOMERS
 SET GENDER = 'FEMALE'
-WHERE GENDER IN ('F');
+WHERE GENDER = ('F');
 
 -- ID değeri 18 olan müşteriyi sil
 DELETE FROM CUSTOMERS
