@@ -477,7 +477,7 @@ DELETE FROM CUSTOMERS
 
 
 
----- aggregate fonc
+---- aggregate fonc nedir
 -- SUM, MIN, MAX, AVG, COUNT
 
 
@@ -515,4 +515,115 @@ FROM SALES
 SELECT
     AVG(AMOUNT) as AvgAmount
 FROM SALES
+
+-- where şartı ve aggregate func
+SELECT 
+    SUM(STOCK) as Elekronik
+FROM ITEMS
+    WHERE CATEGORY = 'Elektronik'
+
+
+
+-- group by NEDİR, 
+-- kullanımı
+
+-- category bazında stock sayısı
+SELECT
+    CATEGORY,
+    SUM(STOCK) AS SUMSTOCK
+FROM ITEMS
+GROUP BY CATEGORY
+ORDER BY SUMSTOCK
+
+
+SELECT
+    TOP 3
+    CATEGORY,
+    SUM(STOCK) AS SUMSTOCK
+FROM ITEMS
+GROUP BY CATEGORY
+ORDER BY SUMSTOCK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
