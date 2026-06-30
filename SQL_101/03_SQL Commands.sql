@@ -394,9 +394,10 @@ WHERE CITY IN ('ISTANBUL', 'ANKARA')
 ORDER BY CITY;
 
 -- NOT IN, belirtilen değerlerin dışında kalan kayıtları getirir.
-SELECT * FROM CUSTOMERS
-    WHERE CITY NOT IN ('ISTANBUL', 'ANKARA')
-    ORDER BY CITY;
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY NOT IN ('ISTANBUL', 'ANKARA')
+ORDER BY CITY;
 
 
 ------------------------------------------------------------------------------------------------
@@ -411,7 +412,8 @@ SELECT
 FROM CUSTOMERS; -- 42 ROWS
 
 -- CITY kolonundaki tekrar eden değerleri tekilleştirerek getirir.
-SELECT DISTINCT CITY 
+SELECT DISTINCT 
+    CITY 
 FROM CUSTOMERS; -- 20 ROWS
 
 -- Kaç farklı şehir olduğunu sayar.
@@ -420,14 +422,15 @@ SELECT
 FROM CUSTOMERS;
 
 -- GENDER kolonundaki farklı değerleri getirir.
-SELECT 
-    DISTINCT GENDER 
+SELECT DISTINCT 
+    GENDER 
 FROM CUSTOMERS; -- 2 ROWS
 
 -- Birden fazla kolon için DISTINCT kullanımı.
 -- CITY ve GENDER kombinasyonlarını tekilleştirir.
-SELECT 
-    DISTINCT CITY, GENDER 
+SELECT DISTINCT 
+    CITY, 
+    GENDER 
 FROM CUSTOMERS;
 
 
@@ -465,185 +468,152 @@ FROM CUSTOMERS;
 -- ID değeri 18 olan müşteriyi getirir.
 SELECT * 
 FROM CUSTOMERS
-    WHERE ID = 18;
+WHERE ID = 18;
 
 -- ID değeri 18 olan müşteriyi siler.
 DELETE FROM CUSTOMERS
-    WHERE ID = 18;
+WHERE ID = 18;
 
 
+------------------------------------------------------------------------------------------------
+-- 4. AGGREGATE FUNCTIONS
+------------------------------------------------------------------------------------------------
+
+-- Aggregate function, birden fazla satır üzerinde hesaplama yapıp tek bir sonuç döndürür.
+-- Sık kullanılan aggregate function'lar:
+-- SUM   : Toplam alır.
+-- MIN   : En küçük değeri getirir.
+-- MAX   : En büyük değeri getirir.
+-- AVG   : Ortalama hesaplar.
+-- COUNT : Satır veya değer sayar.
 
 
+------------------------------------------------------------------------------------------------
+-- SALES TABLOSU ÜZERİNDE TEMEL SORGULAR
+------------------------------------------------------------------------------------------------
 
-
-
----- aggregate fonc nedir
--- SUM, MIN, MAX, AVG, COUNT
-
-
-
+-- SALES tablosundaki tüm kayıtları getirir.
 SELECT 
-* 
-FROM SALES
+    * 
+FROM SALES;
 
--- SATIR SAYDIRMAK
+-- SALES tablosundaki toplam satır sayısını getirir.
 SELECT 
-    COUNT(*) 
-FROM SALES
+    COUNT(*) AS RowCount
+FROM SALES;
 
--- AMOUNTA GÖRE SIRALA
+-- SALES tablosunu AMOUNT kolonuna göre küçükten büyüğe sıralar.
 SELECT 
-* 
+    * 
 FROM SALES
-ORDER BY AMOUNT
+ORDER BY AMOUNT;
 
 
--- MIN AMOUNT GETİRMEK
+------------------------------------------------------------------------------------------------
+-- MIN, MAX, SUM, COUNT VE AVG KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- SALES tablosundaki en küçük AMOUNT değerini getirir.
 SELECT
-    MIN(AMOUNT)
-FROM SALES
+    MIN(AMOUNT) AS MinAmount
+FROM SALES;
 
--- MAX AMOUNT GETIRMEK
+-- SALES tablosundaki en büyük AMOUNT değerini getirir.
 SELECT
-    MAX(AMOUNT)
-FROM SALES
+    MAX(AMOUNT) AS MaxAmount
+FROM SALES;
 
--- MIN. MAX, COUNTR BIRLIKTE
+-- SUM, MIN, MAX ve COUNT fonksiyonlarını birlikte kullanır.
 SELECT
     SUM(AMOUNT) AS TotalAmount,
-    MIN(AMOUNT) as MinAmount,
-    MAX(AMOUNT) as MaxAmount,
-    COUNT(AMOUNT) as CountAmount
-FROM SALES
+    MIN(AMOUNT) AS MinAmount,
+    MAX(AMOUNT) AS MaxAmount,
+    COUNT(AMOUNT) AS CountAmount
+FROM SALES;
 
+-- AMOUNT kolonunun ortalamasını getirir.
 SELECT
-    AVG(AMOUNT) as AvgAmount
-FROM SALES
+    AVG(AMOUNT) AS AvgAmount
+FROM SALES;
 
--- where şartı ve aggregate func
+
+------------------------------------------------------------------------------------------------
+-- WHERE İLE AGGREGATE FUNCTION KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- CATEGORY değeri Elektronik olan ürünlerin toplam stok miktarını getirir.
 SELECT 
-    SUM(STOCK) as Elekronik
+    SUM(STOCK) AS Elektronik
 FROM ITEMS
-    WHERE CATEGORY = 'Elektronik'
+WHERE CATEGORY = 'Elektronik';
 
 
+------------------------------------------------------------------------------------------------
+-- GROUP BY KULLANIMI
+------------------------------------------------------------------------------------------------
 
--- group by NEDİR, 
--- kullanımı
+-- GROUP BY, kayıtları belirli kolonlara göre gruplamak için kullanılır.
+-- Aggregate function'lar ile birlikte raporlama sorgularında sık kullanılır.
 
--- category bazında stock sayısı
+-- Kategori bazında toplam stok miktarını getirir.
 SELECT
     CATEGORY,
-    SUM(STOCK) AS SUMSTOCK
+    SUM(STOCK) AS SumStock
 FROM ITEMS
 GROUP BY CATEGORY
-ORDER BY SUMSTOCK
+ORDER BY SumStock;
 
-
-SELECT
-    TOP 3
+-- Toplam stok miktarına göre ilk 3 kategoriyi getirir.
+SELECT TOP 3
     CATEGORY,
-    SUM(STOCK) AS SUMSTOCK
+    SUM(STOCK) AS SumStock
 FROM ITEMS
 GROUP BY CATEGORY
-ORDER BY SUMSTOCK
+ORDER BY SumStock;
 
 
-
+------------------------------------------------------------------------------------------------
 -- CONVERT KULLANIMI
--- DEGSK DONUTMREK ICIN
+------------------------------------------------------------------------------------------------
+
+-- CONVERT, veri tiplerini dönüştürmek için kullanılır.
+-- Aşağıdaki örnekte SALEDATE kolonundan tarih, saat ve tarih-saat bilgileri ayrı ayrı alınır.
+
 SELECT 
     CONVERT(DATE, SALEDATE) AS Date,
     CONVERT(TIME, SALEDATE) AS Time,
     CONVERT(DATETIME, SALEDATE) AS DateTime,
     *
+FROM SALES;
+
+-- TOTALPRICE kolonunu sorgu sonucunda en başta göstermek için kullanılır.
+SELECT 
+    TOTALPRICE, 
+    *
+FROM SALES;
+
+-- SALEDATE kolonundan tarih ve saat bilgilerini ayrı ayrı getirir.
+-- Not: Bu sorgunun çalışması için SALES tablosunda CATEGORY kolonu bulunmalıdır.
+SELECT 
+    CONVERT(DATE, SALEDATE) AS Date,
+    CONVERT(TIME, SALEDATE) AS Time,
+    *
 FROM SALES
+WHERE CATEGORY = 'Elektronik';
 
 
--- DEGSK. BASA TUTTURMAK
-SELECT TOTALPRICE, 
-        *
+------------------------------------------------------------------------------------------------
+-- GROUP BY İLE RAPORLAMA SORGUSU
+------------------------------------------------------------------------------------------------
+
+-- Şehir ve tarih bazında toplam satış tutarını getirir.
+-- Not: Bu sorgunun çalışması için SALES tablosunda CITIES, DATE2 ve TOTALPRICE kolonları bulunmalıdır.
+
+SELECT
+    CITIES,
+    DATE2,
+    SUM(TOTALPRICE) AS TotalPrice
 FROM SALES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+WHERE CITIES = 'ANKARA'
+GROUP BY CITIES, DATE2
+ORDER BY CITIES, DATE2;
