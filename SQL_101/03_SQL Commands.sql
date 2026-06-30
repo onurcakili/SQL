@@ -1,25 +1,37 @@
 ------------------------------------------------------------------------------------------------
--- SQL Komut Tipleri
+-- SQL KOMUT TİPLERİ
 ------------------------------------------------------------------------------------------------
 
--- 1. DDL (Data Definition Language)      : CREATE, ALTER, DROP, TRUNCATE
--- 2. DML (Data Manipulation Language)    : INSERT, UPDATE, DELETE
--- 3. DQL (Data Query Language)           : SELECT
--- 4. DCL (Data Control Language)         : GRANT, REVOKE
+-- 1. DDL (Data Definition Language)
+--    Veritabanı ve tablo gibi yapıları oluşturmak, değiştirmek veya silmek için kullanılır.
+--    Örnek komutlar: CREATE, ALTER, DROP, TRUNCATE
+
+-- 2. DML (Data Manipulation Language)
+--    Tablo içerisindeki verileri eklemek, güncellemek veya silmek için kullanılır.
+--    Örnek komutlar: INSERT, UPDATE, DELETE
+
+-- 3. DQL (Data Query Language)
+--    Verileri sorgulamak için kullanılır.
+--    Örnek komut: SELECT
+
+-- 4. DCL (Data Control Language)
+--    Yetkilendirme işlemleri için kullanılır.
+--    Örnek komutlar: GRANT, REVOKE
+
 
 ------------------------------------------------------------------------------------------------
 -- 1. DDL (DATA DEFINITION LANGUAGE) KOMUTLARI
 ------------------------------------------------------------------------------------------------
 
--- ETRADE veritabanını oluştur
+-- ETRADE veritabanını oluşturur.
 CREATE DATABASE ETRADE;
 GO
 
--- ETRADE veritabanını kullan
+-- ETRADE veritabanını kullanıma alır.
 USE ETRADE;
 GO
 
--- CUSTOMERS tablosunu oluştur
+-- CUSTOMERS tablosunu oluşturur.
 CREATE TABLE CUSTOMERS
 (
     ID INT PRIMARY KEY,
@@ -31,15 +43,15 @@ CREATE TABLE CUSTOMERS
 );
 GO
 
--- CUSTOMERS tablosuna NATION kolonu ekle
+-- CUSTOMERS tablosuna NATION kolonu ekler.
 ALTER TABLE CUSTOMERS
 ADD NATION VARCHAR(50);
 
--- CUSTOMERS tablosundan NATION kolonunu sil
+-- CUSTOMERS tablosundan NATION kolonunu siler.
 ALTER TABLE CUSTOMERS
 DROP COLUMN NATION;
 
--- CUSTOMERS tablosuna birden fazla kolon ekle
+-- CUSTOMERS tablosuna birden fazla kolon ekler.
 ALTER TABLE CUSTOMERS
 ADD
     NATION VARCHAR(50),
@@ -48,6 +60,7 @@ ADD
 -- CUSTOMERS tablosundaki tüm verileri hızlıca siler.
 -- Tablo yapısı kalır, sadece kayıtlar silinir.
 TRUNCATE TABLE CUSTOMERS;
+
 
 ------------------------------------------------------------------------------------------------
 -- DELETE VS TRUNCATE
@@ -66,24 +79,36 @@ TRUNCATE TABLE CUSTOMERS;
 -- Tablo yapısını silmez.
 -- DELETE'e göre genellikle daha hızlıdır.
 
--- Örnek DELETE:
+-- ID değeri 18 olan kaydı siler.
 DELETE FROM CUSTOMERS
 WHERE ID = 18;
 
--- Örnek TRUNCATE:
+-- Tablodaki tüm kayıtları siler.
 TRUNCATE TABLE CUSTOMERS;
+
 
 ------------------------------------------------------------------------------------------------
 -- 2. DML (DATA MANIPULATION LANGUAGE) KOMUTLARI
 ------------------------------------------------------------------------------------------------
 
--- CUSTOMERS tablosuna tek kayıt ekle
+------------------------------------------------------------------------------------------------
+-- INSERT KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- CUSTOMERS tablosuna tek kayıt ekler.
 INSERT INTO CUSTOMERS
 (ID, CUSTOMERNAME, CITY, BIRTHDATE, DISTRICT, GENDER)
 VALUES 
 (1, 'FATMA GÜR', 'ISTANBUL', '1990-10-15', 'CEKMEKOY', 'F');
 
--- CUSTOMERS tablosuna birden fazla kayıt ekle
+-- ID kolonu belirtilmeden kayıt ekleme örneği.
+-- Not: ID kolonu IDENTITY değilse bu sorgu hata verebilir.
+INSERT INTO CUSTOMERS
+(CUSTOMERNAME, CITY, BIRTHDATE, DISTRICT, GENDER)
+VALUES 
+('Cevher Tan', 'Istanbul', '1997-09-28', 'Beylikduzu', 'M');
+
+-- CUSTOMERS tablosuna birden fazla kayıt ekler.
 INSERT INTO CUSTOMERS
 (ID, CUSTOMERNAME, CITY, BIRTHDATE, DISTRICT, GENDER)
 VALUES
@@ -110,25 +135,37 @@ VALUES
 (22, 'Sabahattin Ali', 'Tekirdag', '1997-09-28', 'Suleymanpasa', 'M'),
 (23, 'Ali Faruk', 'Tekirdag', '1997-09-28', 'Suleymanpasa', 'M');
 
--- Tüm müşterilerin NATION ve AGE bilgilerini güncelle
+
+------------------------------------------------------------------------------------------------
+-- UPDATE KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- Tüm müşterilerin NATION ve AGE bilgilerini günceller.
 UPDATE CUSTOMERS
 SET NATION = 'TR', AGE = 35;
 
--- BIRTHDATE kolonuna göre AGE kolonunu güncelle
+-- BIRTHDATE kolonuna göre AGE kolonunu günceller.
 UPDATE CUSTOMERS
 SET AGE = DATEDIFF(YEAR, BIRTHDATE, GETDATE());
 
--- GENDER değeri M olan kayıtları MALE olarak güncelle
+-- GENDER değeri M olan kayıtları MALE olarak günceller.
+-- Not: GENDER kolonu CHAR(1) tanımlandığı için 'MALE' değeri için kolon tipi uygun değildir.
 UPDATE CUSTOMERS
 SET GENDER = 'MALE'
 WHERE GENDER = ('M');
 
--- GENDER değeri F olan kayıtları FEMALE olarak güncelle
+-- GENDER değeri F olan kayıtları FEMALE olarak günceller.
+-- Not: GENDER kolonu CHAR(1) tanımlandığı için 'FEMALE' değeri için kolon tipi uygun değildir.
 UPDATE CUSTOMERS
 SET GENDER = 'FEMALE'
 WHERE GENDER = ('F');
 
--- ID değeri 18 olan müşteriyi sil
+
+------------------------------------------------------------------------------------------------
+-- DELETE KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- ID değeri 18 olan müşteriyi siler.
 DELETE FROM CUSTOMERS
 WHERE ID = 18;
 
@@ -136,37 +173,43 @@ WHERE ID = 18;
 -- WHERE kullanılmadan DELETE yazılırsa tablodaki tüm kayıtlar silinir.
 DELETE FROM CUSTOMERS;
 
+
 ------------------------------------------------------------------------------------------------
 -- 3. DQL (DATA QUERY LANGUAGE) KOMUTLARI
 ------------------------------------------------------------------------------------------------
 
--- CUSTOMERS tablosundaki tüm kolonları getir
+------------------------------------------------------------------------------------------------
+-- SELECT KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- CUSTOMERS tablosundaki tüm kolonları getirir.
 SELECT * 
 FROM CUSTOMERS;
 
--- CUSTOMERS tablosundan belirli kolonları getir
+-- CUSTOMERS tablosundan belirli kolonları getirir.
 SELECT 
     CUSTOMERNAME,
     CITY,
     DISTRICT
 FROM CUSTOMERS;
 
--- Doğum tarihine göre yıl farkı hesapla
+-- Doğum tarihine göre yıl farkı hesaplar.
 SELECT DATEDIFF(YEAR, '2000-01-01', '2025-01-01');
 
--- Bugünün tarihini getir
+-- Bugünün tarihini getirir.
 SELECT GETDATE();
+
 
 ------------------------------------------------------------------------------------------------
 -- WHERE KULLANIMI
 ------------------------------------------------------------------------------------------------
 
--- CITY değeri ISTANBUL olan kayıtları getir
+-- CITY değeri ISTANBUL olan kayıtları getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CITY = 'ISTANBUL';
 
--- CITY değeri ISTANBUL olmayan kayıtları getir
+-- CITY değeri ISTANBUL olmayan kayıtları getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CITY <> 'ISTANBUL';
@@ -176,24 +219,12 @@ SELECT *
 FROM CUSTOMERS
 WHERE NOT CITY = 'ISTANBUL';
 
--- CITY değeri ISTANBUL ve DISTRICT değeri Kadikoy olan kayıtları getir
-SELECT * 
-FROM CUSTOMERS
-WHERE CITY = 'ISTANBUL' 
-  AND DISTRICT = 'Kadikoy';
-
--- CITY değeri ISTANBUL veya Izmir olan kayıtları getir
-SELECT * 
-FROM CUSTOMERS
-WHERE CITY = 'ISTANBUL' 
-   OR CITY = 'Izmir';
-
--- GENDER değeri F olan kayıtları getir
+-- GENDER değeri F olan kayıtları getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE GENDER = 'F';
 
--- BIRTHDATE değeri 1995-01-01 tarihinden büyük olan kayıtları getir
+-- BIRTHDATE değeri 1995-01-01 tarihinden büyük olan kayıtları getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE > '1995-01-01';
@@ -204,6 +235,61 @@ SELECT *
 FROM CUSTOMERS
 WHERE BIRTHDATE > '19950101';
 
+-- ID değeri 18 olan müşteriyi getirir.
+SELECT * 
+FROM CUSTOMERS
+WHERE ID = 18;
+
+
+------------------------------------------------------------------------------------------------
+-- AND VE OR OPERATÖRLERİ
+------------------------------------------------------------------------------------------------
+
+-- AND operatörü, tüm koşulların aynı anda sağlanmasını ister.
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'Istanbul' 
+  AND DISTRICT = 'Kadikoy';
+
+-- Bir kişinin ilçesi hem 'Kadikoy' hem de 'Beylikduzu' olamayacağı için
+-- bu sorgu beklenen sonucu vermeyebilir.
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'Istanbul' 
+  AND DISTRICT = 'Kadikoy' 
+  AND DISTRICT = 'Beylikduzu';
+
+-- OR operatörü, koşullardan en az birinin sağlanmasını ister.
+-- Not: AND ve OR birlikte kullanılırken parantez kullanımı sorgunun okunabilirliğini artırır.
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'Istanbul' 
+  AND DISTRICT = 'Kadikoy' 
+   OR DISTRICT = 'Beylikduzu';
+
+-- Birden fazla koşulun AND ile doğru kullanımı.
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'ISTANBUL' 
+  AND GENDER = 'MALE'
+  AND DISTRICT = 'Kadikoy';
+
+-- CITY, GENDER ve BIRTHDATE koşullarını birlikte kullanır.
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'ISTANBUL'
+  AND GENDER = 'MALE'
+  AND BIRTHDATE BETWEEN '19950312' AND '19951231';
+
+-- CITY değeri Istanbul veya Izmir olan kayıtları getirir.
+-- Bu kullanım IN ile de yapılabilir: CITY IN ('Istanbul', 'Izmir')
+SELECT * 
+FROM CUSTOMERS
+WHERE CITY = 'Istanbul' 
+   OR CITY = 'Izmir'
+ORDER BY CITY DESC, ID ASC;
+
+
 ------------------------------------------------------------------------------------------------
 -- BETWEEN KULLANIMI
 ------------------------------------------------------------------------------------------------
@@ -211,7 +297,6 @@ WHERE BIRTHDATE > '19950101';
 -- BETWEEN, verilen iki sınır değeri de dahil eder.
 -- Yani BETWEEN '19900101' AND '19931231' yazıldığında
 -- 1990-01-01 ve 1993-12-31 tarihleri de sonuca dahil edilir.
-
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE BETWEEN '19900101' AND '19931231';
@@ -219,78 +304,90 @@ WHERE BIRTHDATE BETWEEN '19900101' AND '19931231';
 -- > ve < kullanımında sınır değerler dahil değildir.
 -- Örneğin BIRTHDATE > '19900101' yazılırsa,
 -- BIRTHDATE değeri tam olarak 1990-01-01 olan kişi sonuca gelmez.
-
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE > '19900101'
   AND BIRTHDATE < '19931231';
 
--- AGE değeri 20 ile 30 arasında olan kayıtları getir
+-- AGE değeri 20 ile 30 arasında olan kayıtları getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE AGE BETWEEN 20 AND 30;
+
+-- Bu tarih aralığındakileri getirmez.
+-- 1995 yılındaki belirtilen tarih aralığının dışında kalanları getirir.
+SELECT * 
+FROM CUSTOMERS
+WHERE NOT BIRTHDATE BETWEEN '19950101' AND '19951231';
+
+-- Yukarıdaki sorgunun operatörlerle yazılmış versiyonu.
+SELECT * 
+FROM CUSTOMERS
+WHERE BIRTHDATE <= '19950101' 
+   OR BIRTHDATE >= '19951231';
+
 
 ------------------------------------------------------------------------------------------------
 -- ORDER BY KULLANIMI
 ------------------------------------------------------------------------------------------------
 
--- Sorgu sonucunu BIRTHDATE kolonuna göre küçükten büyüğe sırala
+-- Sorgu sonucunu BIRTHDATE kolonuna göre küçükten büyüğe sıralar.
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE BETWEEN '19900101' AND '19931231'
-ORDER BY BIRTHDATE asc;
+ORDER BY BIRTHDATE ASC;
 
--- Sorgu sonucunu BIRTHDATE kolonuna göre büyükten küçüğe sırala
+-- Sorgu sonucunu BIRTHDATE kolonuna göre büyükten küçüğe sıralar.
 SELECT * 
 FROM CUSTOMERS
 WHERE BIRTHDATE BETWEEN '19900101' AND '19931231'
 ORDER BY BIRTHDATE DESC;
 
--- ASC (Ascending)   = Kucukten buyuge sıralama yapar.
--- DESC (Descending) = Buyukten kucuge sıralama yapar.
+-- ASC  (Ascending)  = Küçükten büyüğe sıralama yapar.
+-- DESC (Descending) = Büyükten küçüğe sıralama yapar.
 
 
 ------------------------------------------------------------------------------------------------
--- LIKE, NOT LIKE, IN, NOT IN KULLANIMI
+-- LIKE VE NOT LIKE KULLANIMI
 ------------------------------------------------------------------------------------------------
 
 -- LIKE ifadesi, metinsel verilerde belirli bir desene göre arama yapmak için kullanılır.
 -- % işareti, "burada herhangi bir karakter veya karakterler olabilir" anlamına gelir.
 
--- Ali ile başlayan müşterileri getir
+-- Ali ile başlayan müşterileri getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CUSTOMERNAME LIKE 'Ali%';
 
--- Sonucu örnek:
+-- Sonuç örnekleri:
 -- Ali Faruk
 -- Ali Sahin
 
--- Ali ile biten müşterileri getir
+-- Ali ile biten müşterileri getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CUSTOMERNAME LIKE '%Ali';
 
--- Sonucu örnek:
+-- Sonuç örneği:
 -- Sabahattin Ali
 
--- İçerisinde An geçen müşterileri getir
+-- İçerisinde An geçen müşterileri getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CUSTOMERNAME LIKE '%An%';
 
--- Ali ile bitmeyen müşterileri getir
+-- Ali ile bitmeyen müşterileri getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE CUSTOMERNAME NOT LIKE '%Ali';
 
+
 ------------------------------------------------------------------------------------------------
--- IN KULLANIMI
+-- IN VE NOT IN KULLANIMI
 ------------------------------------------------------------------------------------------------
 
 -- IN, bir kolonun birden fazla değerden herhangi birine eşit olup olmadığını kontrol eder.
 -- Genelde birden fazla değeri karşılaştırmak için kullanılır.
-
 SELECT * 
 FROM CUSTOMERS
 WHERE CITY IN ('ISTANBUL', 'ANKARA')
@@ -302,16 +399,72 @@ FROM CUSTOMERS
 WHERE CITY NOT IN ('ISTANBUL', 'ANKARA')
 ORDER BY CITY;
 
+
+------------------------------------------------------------------------------------------------
+-- DISTINCT KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- DISTINCT, tekrar eden satırları tekilleştirmek için kullanılır.
+
+-- CITY kolonundaki tüm değerleri getirir.
+SELECT CITY 
+FROM CUSTOMERS; -- 42 ROWS
+
+-- CITY kolonundaki tekrar eden değerleri tekilleştirerek getirir.
+SELECT DISTINCT CITY 
+FROM CUSTOMERS; -- 20 ROWS
+
+-- Kaç farklı şehir olduğunu sayar.
+SELECT 
+    COUNT(DISTINCT CITY) AS SehirSayisi
+FROM CUSTOMERS;
+
+-- GENDER kolonundaki farklı değerleri getirir.
+SELECT DISTINCT GENDER 
+FROM CUSTOMERS; -- 2 ROWS
+
+-- Birden fazla kolon için DISTINCT kullanımı.
+-- CITY ve GENDER kombinasyonlarını tekilleştirir.
+SELECT DISTINCT CITY, GENDER 
+FROM CUSTOMERS;
+
+
+------------------------------------------------------------------------------------------------
+-- TOP KULLANIMI
+------------------------------------------------------------------------------------------------
+
+-- TOP, sorgu sonucundan belirli sayıda kayıt getirmek için kullanılır.
+
+-- İlk 10 kaydı getirir.
+SELECT TOP 10 
+    * 
+FROM CUSTOMERS;
+
+-- İlk 5 kaydı getirir.
+SELECT TOP 5
+    * 
+FROM CUSTOMERS;
+
+-- Kayıtların ilk yüzde 10'luk kısmını getirir.
+SELECT TOP 10 PERCENT
+    * 
+FROM CUSTOMERS;
+
+-- Kayıtların tamamını yüzde olarak getirir.
+SELECT TOP 100 PERCENT
+    * 
+FROM CUSTOMERS;
+
+
 ------------------------------------------------------------------------------------------------
 -- ID İLE KAYIT SORGULAMA VE SİLME
 ------------------------------------------------------------------------------------------------
 
--- ID değeri 18 olan müşteriyi getir
+-- ID değeri 18 olan müşteriyi getirir.
 SELECT * 
 FROM CUSTOMERS
 WHERE ID = 18;
 
--- ID değeri 18 olan müşteriyi sil
+-- ID değeri 18 olan müşteriyi siler.
 DELETE FROM CUSTOMERS
 WHERE ID = 18;
-
