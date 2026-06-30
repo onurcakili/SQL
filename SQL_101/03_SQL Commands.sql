@@ -394,10 +394,9 @@ WHERE CITY IN ('ISTANBUL', 'ANKARA')
 ORDER BY CITY;
 
 -- NOT IN, belirtilen değerlerin dışında kalan kayıtları getirir.
-SELECT * 
-FROM CUSTOMERS
-WHERE CITY NOT IN ('ISTANBUL', 'ANKARA')
-ORDER BY CITY;
+SELECT * FROM CUSTOMERS
+    WHERE CITY NOT IN ('ISTANBUL', 'ANKARA')
+    ORDER BY CITY;
 
 
 ------------------------------------------------------------------------------------------------
@@ -407,7 +406,8 @@ ORDER BY CITY;
 -- DISTINCT, tekrar eden satırları tekilleştirmek için kullanılır.
 
 -- CITY kolonundaki tüm değerleri getirir.
-SELECT CITY 
+SELECT 
+    CITY 
 FROM CUSTOMERS; -- 42 ROWS
 
 -- CITY kolonundaki tekrar eden değerleri tekilleştirerek getirir.
@@ -420,12 +420,14 @@ SELECT
 FROM CUSTOMERS;
 
 -- GENDER kolonundaki farklı değerleri getirir.
-SELECT DISTINCT GENDER 
+SELECT 
+    DISTINCT GENDER 
 FROM CUSTOMERS; -- 2 ROWS
 
 -- Birden fazla kolon için DISTINCT kullanımı.
 -- CITY ve GENDER kombinasyonlarını tekilleştirir.
-SELECT DISTINCT CITY, GENDER 
+SELECT 
+    DISTINCT CITY, GENDER 
 FROM CUSTOMERS;
 
 
@@ -463,8 +465,54 @@ FROM CUSTOMERS;
 -- ID değeri 18 olan müşteriyi getirir.
 SELECT * 
 FROM CUSTOMERS
-WHERE ID = 18;
+    WHERE ID = 18;
 
 -- ID değeri 18 olan müşteriyi siler.
 DELETE FROM CUSTOMERS
-WHERE ID = 18;
+    WHERE ID = 18;
+
+
+
+
+
+
+
+---- aggregate fonc
+-- SUM, MIN, MAX, AVG, COUNT
+
+
+
+SELECT * FROM SALES
+
+-- SATIR SAYDIRMAK
+SELECT 
+    COUNT(*) 
+FROM SALES
+
+-- AMOUNTA GÖRE SIRALA
+SELECT * FROM SALES
+ORDER BY AMOUNT
+
+
+-- MIN AMOUNT GETİRMEK
+SELECT
+    MIN(AMOUNT)
+FROM SALES
+
+-- MAX AMOUNT GETIRMEK
+SELECT
+    MAX(AMOUNT)
+FROM SALES
+
+-- MIN. MAX, COUNTR BIRLIKTE
+SELECT
+    SUM(AMOUNT) AS TotalAmount,
+    MIN(AMOUNT) as MinAmount,
+    MAX(AMOUNT) as MaxAmount,
+    COUNT(AMOUNT) as CountAmount
+FROM SALES
+
+SELECT
+    AVG(AMOUNT) as AvgAmount
+FROM SALES
+
