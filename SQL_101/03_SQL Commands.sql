@@ -252,7 +252,7 @@ WHERE CITY = 'Istanbul'
   AND DISTRICT = 'Kadikoy';
 
 -- Bir kişinin ilçesi hem 'Kadikoy' hem de 'Beylikduzu' olamayacağı için
--- bu sorgu beklenen sonucu vermeyebilir.
+-- bu sorgu beklenen sonucu vermez.
 SELECT * 
 FROM CUSTOMERS
 WHERE CITY = 'Istanbul' 

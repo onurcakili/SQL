@@ -175,8 +175,7 @@
 -- - Ölçülü maliyet değerleri
 -- - Komisyon oranları
 --
--- Not:
--- SQL Server'da DECIMAL ve NUMERIC işlevsel olarak eşdeğerdir.
+-- Not: SQL Server'da DECIMAL ve NUMERIC işlevsel olarak eşdeğerdir.
 
 
 ----------------
@@ -603,14 +602,12 @@
 -- 6.2 XML
 ----------------
 
--- XML, “Extensible Markup Language” ifadesinin kısaltmasıdır Türkçeye "Genişletilebilir İşaretleme
--- Dili" olarak çevrilir.
+-- XML, “Extensible Markup Language” ifadesinin kısaltmasıdır Türkçeye "Genişletilebilir İşaretleme Dili" olarak çevrilir.
 -- XML, veriyi etiketler kullanarak düzenli ve hiyerarşik biçimde saklamak veya sistemler arasında
 -- taşımak için kullanılan metin tabanlı bir veri formatıdır.
 -- HTML görünümü tanımlarken, XML verinin yapısını ve anlamını tanımlar.
 --
--- SQL Server XML verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına destek
--- verir.
+-- SQL Server XML verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına destek verir.
 --
 -- Örnek kullanım alanları:
 -- - Konfigürasyon verileri

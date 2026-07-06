@@ -38,7 +38,7 @@
 --
 -- DBMS'in temel görevleri şunlardır:
 --
--- - Verinin oluşturulması ve saklanması
+-- - Verinin oluşturulması ve saklanması 
 -- - Verinin sorgulanması, güncellenmesi ve silinmesi
 -- - Birden fazla kullanıcının eşzamanlı erişiminin yönetilmesi
 -- - Güvenlik ve yetkilendirme mekanizmalarının uygulanması
