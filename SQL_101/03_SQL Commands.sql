@@ -701,24 +701,15 @@ SET YEAR_ = DATEPART(YEAR, SALEDATE)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT 
+    YEAR_,
+    MONTHNAME_,
+    SUM(TOTALPRICE) AS TotalPrice
+FROM SALES
+GROUP BY 
+    YEAR_,
+    MONTHNAME_
+HAVING SUM(TOTALPRICE) > 50000
 
 
 
