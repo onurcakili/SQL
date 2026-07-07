@@ -617,3 +617,110 @@ FROM SALES
 WHERE CITIES = 'ANKARA'
 GROUP BY CITIES, DATE2
 ORDER BY CITIES, DATE2;
+
+
+
+
+------------------------
+-- 07-07-2026
+
+-- Aylara göre satış değerlerini getirmek
+
+SELECT * FROM SALES
+
+SELECT 
+    FORMAT(SALEDATE, 'yyyy-MM') as YearMonth,
+    SUM(TOTALPRICE) AS TotalPrice
+FROM SALES
+GROUP BY FORMAT(SALEDATE, 'yyyy-MM')
+ORDER BY FORMAT(SALEDATE, 'yyyy-MM')
+
+
+--  PERFORMANS
+
+SELECT
+    DATEFROMPARTS(YEAR(SALEDATE), MONTH(SALEDATE), 1) as YearMonth,
+    SUM(TOTALPRICE) as TotalPrice
+FROM SALES
+GROUP BY DATEFROMPARTS(YEAR(SALEDATE), MONTH(SALEDATE), 1)
+ORDER BY YearMonth
+
+
+-- AY ISIMLERIYLE
+SELECT
+    DATEFROMPARTS(YEAR(SALEDATE), MONTH(SALEDATE), 1) AS YearMonth,
+    DATENAME(MONTH, DATEFROMPARTS(YEAR(SALEDATE), MONTH(SALEDATE), 1)) AS MonthName,
+    SUM(TOTALPRICE) AS TotalPrice
+FROM SALES
+GROUP BY DATEFROMPARTS(YEAR(SALEDATE), MONTH(SALEDATE), 1)
+ORDER BY YearMonth;
+
+
+
+----
+
+SELECT
+    SALEDATE, 
+    -- Örnek çıktı: 2026-01-15
+
+    DATEPART(YEAR, SALEDATE) AS SaleYear,
+    -- Çıktı: 2026
+
+    DATEPART(MONTH, SALEDATE) AS SaleMonth,
+    -- Çıktı: 1, 2, 3 ... 12
+
+    DATENAME(MONTH, SALEDATE) AS MonthName,
+    -- Çıktı: January, February, March ...
+
+    DATENAME(WEEKDAY, SALEDATE) AS DayName,
+    -- Çıktı: Monday, Tuesday, Wednesday ...
+
+    DATEFROMPARTS(
+        YEAR(SALEDATE),
+        MONTH(SALEDATE),
+        1
+    ) AS YearMonth
+    -- Çıktı: 2026-01-01, 2026-02-01, 2026-03-01 ...
+
+FROM SALES
+
+----
+
+
+SELECT * FROM SALES
+
+ALTER TABLE SALES
+ADD MONTHNAME_ VARCHAR(20),
+    YEAR_ INT
+
+UPDATE SALES
+SET MONTHNAME_ = DATENAME(MONTH, SALEDATE)
+
+UPDATE SALES
+SET YEAR_ = DATEPART(YEAR, SALEDATE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
