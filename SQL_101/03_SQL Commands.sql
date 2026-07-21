@@ -859,4 +859,208 @@ REVOKE SELECT ON CUSTOMERS FROM ETRADE_READER;
 DENY DELETE ON CUSTOMERS TO ETRADE_READER;
 
 -- DENY ile konulan DELETE yasağını kaldırır.
-REVOKE DELETE ON CUSTOMERS FROM ETRADE_READER;
+REVOKE DELETE ON CUSTOMERS FROM ETRADE_READER; 
+
+
+
+---- 
+
+SELECT * FROM ORDERS
+SELECT * FROM USERS
+
+
+-- İKİ TABLO BİRLESTİRMEK
+SELECT * FROM ORDERS, USERS
+WHERE ORDERS.USERID = USERS.ID
+
+
+
+
+-- IKI TABLODAN BELIRLI KOLONLARI GETIRMKE
+SELECT 
+    NAMESURNAME, 
+    EMAIL, 
+    TOTALPRICE
+FROM ORDERS, USERS
+WHERE ORDERS.USERID = USERS.ID
+
+
+
+-- IKI TABLODAN BELIRLI KOLONLARI VE KULLANICI GETIRMKE
+SELECT 
+    NAMESURNAME, 
+    EMAIL, 
+    TOTALPRICE
+FROM ORDERS, USERS
+WHERE ORDERS.USERID = USERS.ID
+AND
+USERID = 1
+
+
+-- ALIAS KULLANIMI
+SELECT 
+    U.NAMESURNAME, 
+    U.EMAIL, 
+    O.TOTALPRICE
+FROM ORDERS O, USERS U
+WHERE O.USERID = U.ID
+AND
+U.ID = 1
+
+
+
+-- AS ILE ORNEK
+
+SELECT 
+    U.NAMESURNAME AS KULLANICIADI, 
+    U.EMAIL AS KULLANICIEMAIL, 
+    O.TOTALPRICE AS TOPLAMTUTAR 
+FROM ORDERS O, USERS U
+WHERE O.USERID = U.ID
+AND
+U.ID = 1
+
+
+
+---------------------
+-- JOIN Kavramları--
+---------------------
+
+
+-- INNER JOIN : (KESİŞİM) İki tabloda da eşleşen kayıtları getirmek için kullanılır.
+
+-- LEFT JOIN : Sol tablodaki tüm kayıtları ve sağ tabloda eşleşen kayıtları getirmek için kullanılır.
+-- Sağ tabloda eşleşme yoksa ilgili alanlar NULL gelir.
+
+-- RIGHT JOIN : Sağ tablodaki tüm kayıtları ve sol tabloda eşleşen kayıtları getirmek için kullanılır.
+-- Sol tabloda eşleşme yoksa ilgili alanlar NULL gelir.
+
+-- FULL OUTER JOIN : Her iki tablodaki tüm kayıtları getirmek için kullanılır.
+-- Eşleşmeyen tarafın alanları NULL gelir.
+
+-- CROSS JOIN : İki tablodaki tüm kayıtların birbiriyle kombinasyonunu oluşturmak için kullanılır.
+-- Örneğin bir tabloda 3, diğerinde 4 kayıt varsa sonuç 12 satır olur.
+
+-- SELF JOIN : Bir tabloyu yine kendisiyle birleştirmek için kullanılır.
+-- Genellikle çalışan-yönetici veya kategori-alt kategori ilişkilerinde kullanılır.
+
+
+-- INNER JOIN KULLANIMI
+SELECT
+ U.NAMESURNAME,
+ U.EMAIL,
+ O.TOTALPRICE,
+ O.STATUS_
+FROM USERS U
+JOIN ORDERS O    -- JOIN IFADESI DEFAULT : INNER JOIN
+ON U.ID = O.USERID
+
+
+
+
+-- BIRDEN FAZLA JOIN BIRLIKTE KULLANIMI
+SELECT
+    U.NAMESURNAME,
+    O.TOTALPRICE,
+    O.DATE_,
+    P.DATE_
+FROM USERS U
+JOIN ORDERS O ON O.USERID = U.ID
+JOIN PAYMENTS P ON P.ORDERID = O.ID
+
+
+
+---------------
+-- DİGER JOIN UYG. ORNEKLERI
+---------------
+
+-- BIRDEN FAZLA JOIN BIRLIKTE KULLANIMI
+
+SELECT * FROM ORDERS
+SELECT * FROM ITEMS
+
+-- SADECE SATILAN URUNLERI GETİREN SORGU
+SELECT 
+    O.ID,
+    I.ID,
+    I.ITEMNAME
+FROM ORDERS O
+INNER JOIN ITEMS I ON O.ID = I.ID
+
+
+-- SADECE SATILMAYAN URUNLERI GETİREN SORGU
+SELECT 
+    O.ID,
+    I.ID,
+    I.ITEMNAME
+FROM ORDERS O
+RIGHT JOIN ITEMS I ON O.ID = I.ID
+WHERE O.ID IS NULL
+
+SELECT * FROM ORDERS
+
+-- SIPARIS VEREN MUSTERILER
+SELECT
+	U.USERNAME_,
+	U.EMAIL,
+	O.TOTALPRICE,
+	O.STATUS_
+FROM ORDERS O
+INNER JOIN USERS U
+ON O.USERID = U.ID 
+
+
+-- SIPARIS VEREN + VERMEYEN MUSTERILER
+SELECT
+	U.USERNAME_,
+	U.EMAIL,
+	O.TOTALPRICE,
+	O.STATUS_
+FROM USERS U
+LEFT JOIN ORDERS O
+ON U.ID = O.USERID
+
+
+
+-- SIPARIS VERMEYENLER + NULL ILE KONTROL
+SELECT
+	U.USERNAME_,
+	U.EMAIL
+FROM USERS U
+LEFT JOIN ORDERS O
+ON U.ID = O.USERID
+WHERE O.ID IS NULL
+
+
+
+-- Tüm siparişler  + Kullanıcısı bulunmayan siparişler
+SELECT
+    O.ID,
+    O.TOTALPRICE,
+    U.USERNAME_,
+    U.EMAIL
+FROM USERS U
+RIGHT JOIN ORDERS O
+    ON U.ID = O.USERID;
+
+
+
+-- sipariş vermemiş kullanıcılar + hem de kullanıcısı bulunmayan siparişler 
+SELECT
+	U.USERNAME_,
+	U.EMAIL,
+	O.ID,
+	O.TOTALPRICE
+FROM USERS U
+FULL JOIN ORDERS O
+ON U.ID = O.ID
+
+
+
+
+
+
+
+
+
+
