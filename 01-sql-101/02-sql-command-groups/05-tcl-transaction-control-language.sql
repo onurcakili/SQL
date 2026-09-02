@@ -73,3 +73,27 @@ COMMIT;
 -- Long transactions can create locks and performance problems.
 -- Keep transaction scope small and intentional.
 -- Use SELECT first when the transaction changes important data.
+
+
+
+BEGIN TRANSACTION;
+
+BEGIN TRY
+
+-- UPDATE CUSTOMERS
+-- SET BALANCE = BALANCE - 100
+-- WHERE ID = 1001
+
+-- UPDATE CUSTOMERS
+-- SET BALANCE = BALANCE + 100
+-- WHERE ID = 2002
+
+COMMIT TRANSACTION
+
+END TRY
+
+BEGIN CATCH
+
+ROLLBACK TRANSACTION UpdateCustomerBalance
+
+END CATCH

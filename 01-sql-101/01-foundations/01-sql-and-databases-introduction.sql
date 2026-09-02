@@ -52,8 +52,7 @@
 -- 4. İLİŞKİSEL VERİTABANI YÖNETİM SİSTEMİ (RDBMS)
 --
 -- İlişkisel Veritabanı Yönetim Sistemi (Relational Database Management System - RDBMS),
--- verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler kurulmasını sağlayan DBMS
--- türüdür.
+-- verileri tablolar halinde saklayan ve bu tablolar arasında ilişkiler kurulmasını sağlayan DBMS türüdür.
 --
 -- İlişkisel modelde tablolar arasındaki bağlantılar genellikle aşağıdaki
 -- anahtar yapılarıyla kurulur:
