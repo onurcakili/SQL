@@ -1,21 +1,21 @@
 -----------------------------------------------------------------------------------------------
--- SQL SERVER VERİ TİPLERİNE GİRİŞ
+-- # SQL SERVER VERİ TİPLERİNE GİRİŞ
 -----------------------------------------------------------------------------------------------
 
+-- ## Veri Tipi Nedir?
+--
 -- Veri tipi (Data Type), bir kolonun hangi türde veri saklayacağını belirleyen temel veritabanı tanımıdır.
--- Bir kolona atanacak veri tipi; o kolonda metin, sayı, tarih,
--- mantıksal değer veya ikili veri gibi hangi tür bilginin tutulacağını belirler.
+-- Bir kolona atanan veri tipi; o kolonda metin, sayı, tarih, mantıksal değer veya ikili veri gibi hangi tür bilginin tutulacağını belirler.
 --
 -- Örneğin:
 -- - Bir kişinin adı için metinsel bir veri tipi kullanılır.
 -- - Ürün fiyatı için ondalıklı ve kesin hesaplama yapabilen bir veri tipi seçilir.
 -- - Sipariş tarihi için tarih veya tarih-saat veri tipi tercih edilir.
 -- - Aktif/pasif durumu için BIT veri tipi kullanılabilir.
+
+-- ## Veri Tipi Seçiminin Önemi
 --
--- Doğru veri tipi seçimi yalnızca verinin saklanmasını değil; performansı, depolama maliyetini,
--- veri bütünlüğünü ve sorgu doğruluğunu da doğrudan etkiler.
---
--- Veri tipi seçimi aşağıdaki açılardan önemlidir:
+-- Doğru veri tipi seçimi yalnızca verinin saklanmasını değil; performansı, depolama maliyetini, veri bütünlüğünü ve sorgu doğruluğunu da doğrudan etkiler:
 --
 -- - Gereksiz depolama kullanımını azaltır.
 -- - Verinin beklenen formatta saklanmasını sağlar.
@@ -23,154 +23,126 @@
 -- - Analitik işlemlerin daha doğru yapılmasına yardımcı olur.
 -- - Hatalı veya tutarsız veri girişlerini azaltır.
 --
--- Bu nedenle her kolon için veri tipi seçilirken verinin anlamı, değer aralığı, uzunluğu,
--- hassasiyet ihtiyacı ve kullanım senaryosu birlikte değerlendirilmelidir.
+-- Bu nedenle her kolon için veri tipi seçilirken verinin anlamı, değer aralığı, uzunluğu, hassasiyet ihtiyacı ve kullanım senaryosu birlikte değerlendirilmelidir.
 
-
------------------------------------------------------------------------------------------------
--- VERİ TİPİ KATEGORİLERİ
------------------------------------------------------------------------------------------------
-
-
------------------------------------------------------------------------------------------------
--- 1. NUMERIC DATA TYPES
------------------------------------------------------------------------------------------------
-
-----------------
--- 1.1 TINYINT
-----------------
-
--- TINYINT, küçük ve yalnızca pozitif tam sayıları saklamak için kullanılan sayısal veri tipidir.
+-- ## Veri Tipi Kategorileri
 --
--- Değer aralığı  : 0 - 255
--- Depolama alanı : 1 Byte
+-- 1. Sayısal (Numeric) Veri Tipleri
+-- 2. Karakter (Character) Veri Tipleri
+-- 3. Tarih & Saat (Date & Time) Veri Tipleri
+-- 4. Mantıksal (Boolean) Veri Tipleri
+-- 5. İkili (Binary) Veri Tipleri
+-- 6. Özel Amaçlı (Special Purpose) Veri Tipleri
+
+
+-----------------------------------------------------------------------------------------------
+-- # 1. SAYISAL (NUMERIC) VERİ TİPLERİ
+-----------------------------------------------------------------------------------------------
+
+-- ## 1.1 TINYINT
 --
--- Bu veri tipi, çok geniş sayı aralıklarına ihtiyaç duyulmayan alanlarda depolama açısından avantaj sağlar.
+-- Küçük ve yalnızca pozitif tam sayıları saklamak için kullanılır.
 --
--- Örnek kullanım alanları:
+-- - Değer aralığı  : 0 - 255
+-- - Depolama alanı : 1 Byte
+--
+-- Geniş sayı aralıklarına ihtiyaç duyulmayan alanlarda depolama açısından avantaj sağlar.
+--
+-- Kullanım alanları:
 -- - Yaş bilgisi
 -- - Puan değeri
 -- - Seviye bilgisi
 -- - Durum kodları
 --
--- Örnek:
--- Bir müşterinin üyelik seviyesi 1, 2, 3 gibi küçük değerlerle tutulacaksa TINYINT uygun bir seçim olabilir.
+-- Örnek: Bir müşterinin üyelik seviyesi 1, 2, 3 gibi küçük değerlerle tutulacaksa TINYINT uygun bir seçimdir.
 
 
-----------------
--- 1.2 SMALLINT
-----------------
-
--- SMALLINT, TINYINT'e göre daha geniş aralıklı ancak INT'e göre daha az depolama alanı kullanan tam sayı veri tipidir.
+-- ## 1.2 SMALLINT
 --
--- Değer aralığı  : -32,768 - 32,767
--- Depolama alanı : 2 Byte
+-- TINYINT'e göre daha geniş aralıklı, INT'e göre daha az depolama alanı kullanan tam sayı veri tipidir.
 --
--- Örnek kullanım alanları:
+-- - Değer aralığı  : -32.768 - 32.767
+-- - Depolama alanı : 2 Byte
+--
+-- Kullanım alanları:
 -- - Yıl bilgisi
 -- - Küçük sayaç değerleri
 -- - Sınırlı aralığa sahip sayısal bilgiler
 --
--- Örnek:
--- Bir ürünün stok uyarı limiti SMALLINT ile saklanabilir.
+-- Örnek: Bir ürünün stok uyarı limiti SMALLINT ile saklanabilir.
 
 
-----------------
--- 1.3 INT
-----------------
-
--- INT, SQL Server'da genel amaçlı tam sayı değerleri için en sık kullanılan veri tiplerinden biridir.
+-- ## 1.3 INT
 --
--- Değer aralığı  : -2,147,483,648 - 2,147,483,647  (2.14 milyar civarı)
--- Depolama alanı : 4 Byte
+-- SQL Server'da genel amaçlı tam sayı değerleri için en sık kullanılan veri tipidir.
 --
--- Geniş değer aralığı sunduğu için kimlik alanları,
--- sayaçlar ve birçok standart sayısal kolon için uygundur.
+-- - Değer aralığı  : -2.147.483.648 - 2.147.483.647 (~2,14 milyar)
+-- - Depolama alanı : 4 Byte
 --
--- Örnek kullanım alanları:
+-- Geniş değer aralığı sunduğu için kimlik alanları, sayaçlar ve birçok standart sayısal kolon için uygundur.
+--
+-- Kullanım alanları:
 -- - CustomerID
 -- - ProductID
 -- - Sipariş numarası
 -- - Sayaç değerleri
 --
--- Örnek:
--- Bir müşteri tablosunda her müşteriyi benzersiz olarak tanımlamak için CustomerID INT veri tipiyle oluşturulabilir.
+-- Örnek: Bir müşteri tablosunda her müşteriyi benzersiz tanımlamak için CustomerID, INT veri tipiyle oluşturulabilir.
 
 
-----------------
--- 1.4 BIGINT
-----------------
-
--- BIGINT, çok büyük tam sayıların saklanması gereken durumlarda kullanılan veri tipidir.
+-- ## 1.4 BIGINT
 --
--- Değer aralığı  : -9,223,372,036,854,775,808 (-9.22 kentilyon civarı)
---                  9,223,372,036,854,775,807
--- Depolama alanı : 8 Byte
+-- Çok büyük tam sayıların saklanması gereken durumlarda kullanılır.
+--
+-- - Değer aralığı  : -9.223.372.036.854.775.808 - 9.223.372.036.854.775.807 (~9,22 kentilyon)
+-- - Depolama alanı : 8 Byte
 --
 -- INT veri tipinin değer aralığının yetersiz kaldığı yüksek hacimli sistemlerde tercih edilir.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Büyük ölçekli log kayıtları
 -- - Çok yüksek işlem hacmine sahip sistemler
 -- - Büyük veri platformlarındaki sayaçlar
 -- - Dağıtık sistemlerde üretilen büyük ID değerleri
 --
--- Örnek:
--- Milyarlarca işlem kaydı tutan bir finans sisteminde işlem numarası BIGINT olarak tanımlanabilir.
+-- Örnek: Milyarlarca işlem kaydı tutan bir finans sisteminde işlem numarası BIGINT olarak tanımlanabilir.
 
 
-----------------
--- 1.5 DECIMAL
-----------------
-
--- DECIMAL, kesinlik gerektiren ondalıklı sayıları saklamak için kullanılan sayısal veri tipidir.
--- Yaklaşık değer değil, belirlenen basamak sayısına göre kesin değer saklar.
+-- ## 1.5 DECIMAL
 --
--- Kullanım biçimi:
--- DECIMAL(p, s)
+-- Kesinlik gerektiren ondalıklı sayıları saklamak için kullanılır.
+-- Yaklaşık değil, belirlenen basamak sayısına göre kesin değer saklar.
 --
--- p (precision) : Sayının toplam basamak sayısını ifade eder.
--- s (scale)     : Ondalık kısmın kaç basamak olacağını ifade eder.
+-- Kullanım biçimi : DECIMAL(p, s)
+-- - p (precision) : Sayının toplam basamak sayısı.
+-- - s (scale)     : Ondalık kısmın basamak sayısı.
 --
--- Örnek:
--- DECIMAL(10,2) tanımı, toplam 10 basamaklı ve virgülden sonra 2 basamaklı değerlerin saklanabileceği anlamına gelir.
+-- Örnek: DECIMAL(10,2) tanımı, toplam 10 basamaklı ve virgülden sonra 2 basamaklı değerlerin saklanabileceği anlamına gelir (örn. 125000.75).
 --
--- Örneğin:
--- 125000.75 değeri DECIMAL(10,2) içinde saklanabilir.
+-- Depolama alanı (basamak sayısına göre):
+-- - 1-9 basamak   : 5 Byte
+-- - 10-19 basamak : 9 Byte
+-- - 20-28 basamak : 13 Byte
+-- - 29-38 basamak : 17 Byte
 --
--- Depolama alanı:
--- 1-9 basamak    : 5 Byte
--- 10-19 basamak  : 9 Byte
--- 20-28 basamak  : 13 Byte
--- 29-38 basamak  : 17 Byte
---
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Ürün fiyatı
 -- - Maaş bilgisi
 -- - Vergi oranı
 -- - Bakiye
 -- - Finansal hesaplamalar
 --
--- Not:
--- Para ve finans işlemlerinde FLOAT yerine DECIMAL kullanılması daha doğru bir yaklaşımdır;
--- çünkü FLOAT yaklaşık değer saklar, DECIMAL ise kesin değer üretir.
+-- Not: Para ve finans işlemlerinde FLOAT yerine DECIMAL kullanılması daha doğrudur; çünkü FLOAT yaklaşık değer saklarken DECIMAL kesin değer üretir.
 
 
-----------------
--- 1.6 NUMERIC
-----------------
-
--- NUMERIC, SQL Server'da DECIMAL ile aynı işlevi gören kesin sayısal veri tipidir.
+-- ## 1.6 NUMERIC
 --
--- Kullanım biçimi:
--- NUMERIC(p, s)
+-- SQL Server'da DECIMAL ile aynı işlevi gören kesin sayısal veri tipidir.
 --
--- DECIMAL gibi toplam basamak sayısı ve ondalık basamak sayısı belirtilerek kullanılır.
+-- Kullanım biçimi : NUMERIC(p, s) — DECIMAL ile aynı mantıkla kullanılır.
+-- Örnek           : NUMERIC(8,2) ifadesi, toplam 8 basamaklı ve virgülden sonra 2 basamaklı değerleri saklayabilir.
 --
--- Örnek:
--- NUMERIC(8,2) ifadesi, toplam 8 basamaklı ve virgülden sonra 2 basamaklı değerleri saklayabilir.
---
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Finansal hesaplamalar
 -- - Ölçülü maliyet değerleri
 -- - Komisyon oranları
@@ -178,480 +150,355 @@
 -- Not: SQL Server'da DECIMAL ve NUMERIC işlevsel olarak eşdeğerdir.
 
 
-----------------
--- 1.7 FLOAT
-----------------
-
--- FLOAT, yaklaşık sayısal değerleri saklamak için kullanılan veri tipidir.
--- Çok büyük veya çok küçük sayıları saklayabilir;
--- ancak kesinlik garantisi DECIMAL kadar güçlü değildir.
+-- ## 1.7 FLOAT
 --
--- Değer aralığı:
--- Yaklaşık ±1.79E+308 (1.79 × 10³⁰⁸)
+-- Yaklaşık sayısal değerleri saklamak için kullanılır.
+-- Çok büyük veya çok küçük sayıları saklayabilir; ancak kesinlik garantisi DECIMAL kadar güçlü değildir.
 --
--- Depolama alanı:
--- FLOAT(1-24)   : 4 Byte
--- FLOAT(25-53)  : 8 Byte
+-- - Değer aralığı  : Yaklaşık ±1.79E+308
+-- - Depolama alanı : FLOAT(1-24) için 4 Byte, FLOAT(25-53) için 8 Byte
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Bilimsel hesaplamalar
 -- - Sensör verileri
 -- - İstatistiksel hesaplamalar
 -- - Yaklaşık ölçüm değerleri
 --
--- Örnek:
--- Sıcaklık, basınç veya mesafe gibi ölçüm verilerinde küçük hassasiyet farkları kabul edilebilir
--- olduğundan FLOAT tercih edilebilir.
+-- Örnek: Sıcaklık, basınç veya mesafe gibi ölçüm verilerinde küçük hassasiyet farkları kabul edilebilir olduğundan FLOAT tercih edilebilir.
 --
--- Not:
--- Ürün fiyatı, maaş veya bakiye gibi kesinlik gerektiren alanlarda FLOAT yerine DECIMAL veya NUMERIC kullanılmalıdır.
+-- Not: Ürün fiyatı, maaş veya bakiye gibi kesinlik gerektiren alanlarda FLOAT yerine DECIMAL veya NUMERIC kullanılmalıdır.
 
 
 -----------------------------------------------------------------------------------------------
--- 2. CHARACTER DATA TYPES
+-- # 2. KARAKTER (CHARACTER) VERİ TİPLERİ
 -----------------------------------------------------------------------------------------------
 
-----------------
--- 2.1 CHAR
-----------------
-
--- CHAR, sabit uzunluklu metin verilerini saklamak için kullanılır.
+-- ## 2.1 CHAR
 --
--- Kullanım biçimi:
--- CHAR(n)
+-- Sabit uzunluklu metin verilerini saklamak için kullanılır.
 --
--- Depolama alanı:
--- Her zaman n Byte alan kullanır.
+-- Kullanım biçimi : CHAR(n)
+-- Depolama alanı  : Her zaman n Byte (girilen değerin uzunluğundan bağımsız olarak).
 --
--- Bu veri tipi, saklanacak metnin uzunluğu her kayıtta aynıysa uygundur.
+-- Saklanacak metnin uzunluğu her kayıtta aynıysa uygundur.
 --
--- Örnek kullanım alanları:
--- - Ülke kodu: TR, US, DE
--- - Cinsiyet kodu: E, K
+-- Kullanım alanları:
+-- - Ülke kodu (TR, US, DE)
+-- - Cinsiyet kodu (E, K)
 -- - Sabit uzunluklu durum kodları
 --
--- Örnek:
--- CountryCode CHAR(2) olarak tanımlanırsa her kayıt için 2 karakterlik alan ayrılır.
+-- Örnek: CountryCode CHAR(2) olarak tanımlanırsa her kayıt için 2 karakterlik alan ayrılır.
 
 
-----------------
--- 2.2 VARCHAR
-----------------
-
--- VARCHAR, değişken uzunluklu metin verilerini saklamak için kullanılır.
+-- ## 2.2 VARCHAR
 --
--- Kullanım biçimi:
--- VARCHAR(n)
+-- Değişken uzunluklu metin verilerini saklamak için kullanılır.
 --
--- Depolama alanı:
--- Girilen metnin gerçek uzunluğu kadar alan kullanır.
+-- Kullanım biçimi : VARCHAR(n)
+-- Depolama alanı  : Girilen metnin gerçek uzunluğu kadar.
 --
--- CHAR'dan farklı olarak tüm kayıtlar için sabit uzunlukta yer ayırmaz.
--- Bu nedenle uzunluğu değişebilen metinlerde daha verimli olabilir.
+-- CHAR'dan farklı olarak tüm kayıtlar için sabit uzunlukta yer ayırmaz; bu nedenle uzunluğu değişebilen metinlerde daha verimlidir.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Ad
 -- - Soyad
 -- - E-posta
 -- - Telefon açıklaması
 -- - Kısa adres bilgisi
 --
--- Örnek:
--- FirstName VARCHAR(50) olarak tanımlandığında, 50 karaktere kadar ad bilgisi saklanabilir;
--- ancak girilen değer daha kısaysa yalnızca ihtiyaç duyulan alan kullanılır.
+-- Örnek: FirstName VARCHAR(50) olarak tanımlandığında 50 karaktere kadar ad bilgisi saklanabilir; girilen değer daha kısaysa yalnızca ihtiyaç duyulan alan kullanılır.
 
 
-----------------
--- 2.3 VARCHAR(MAX)
-----------------
-
--- VARCHAR(MAX), çok uzun metinsel verileri saklamak için kullanılır.
+-- ## 2.3 VARCHAR(MAX)
 --
--- Depolama kapasitesi:
--- Yaklaşık 2 GB'a kadar veri saklayabilir.
+-- Çok uzun metinsel verileri saklamak için kullanılır.
 --
--- Örnek kullanım alanları:
+-- Depolama kapasitesi : Yaklaşık 2 GB'a kadar.
+--
+-- Kullanım alanları:
 -- - Uzun açıklama metinleri
 -- - Log içerikleri
 -- - Makale veya yorum metinleri
 -- - Serbest metin alanları
 --
--- Örnek:
--- Kullanıcıların uzun açıklama girebildiği bir Description kolonu VARCHAR(MAX) olarak tanımlanabilir.
+-- Örnek: Kullanıcıların uzun açıklama girebildiği bir Description kolonu VARCHAR(MAX) olarak tanımlanabilir.
 
 
-----------------
--- 2.4 NCHAR
-----------------
-
--- NCHAR, sabit uzunluklu Unicode metin verilerini saklamak için kullanılır.
--- Unicode desteği sayesinde Türkçe, Arapça, Çince,
--- Kiril alfabesi gibi farklı karakter kümeleri güvenli biçimde saklanabilir.
-
--- Unicode uluslararası bir karakter kodlama standardıdır.
+-- ## 2.4 NCHAR
 --
--- Kullanım biçimi:
--- NCHAR(n)
+-- Sabit uzunluklu Unicode metin verilerini saklamak için kullanılır.
+-- Unicode, uluslararası bir karakter kodlama standardıdır ve Türkçe, Arapça, Çince, Kiril alfabesi gibi farklı karakter kümelerinin güvenli biçimde saklanmasını sağlar.
 --
--- Depolama alanı:
--- 2 * n Byte
+-- Kullanım biçimi : NCHAR(n)
+-- Depolama alanı  : 2 * n Byte
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Çok dilli sabit kodlar
 -- - Sabit uzunluklu Unicode alanlar
 --
--- Örnek:
--- Dil kodu veya sabit uzunluklu uluslararası metinsel kodlar NCHAR ile tutulabilir.
+-- Örnek: Dil kodu veya sabit uzunluklu uluslararası metinsel kodlar NCHAR ile tutulabilir.
 
 
-----------------
--- 2.5 NVARCHAR
-----------------
-
--- NVARCHAR, değişken uzunluklu Unicode metin verilerini saklamak için kullanılır.
+-- ## 2.5 NVARCHAR
 --
--- Kullanım biçimi:
--- NVARCHAR(n)
+-- Değişken uzunluklu Unicode metin verilerini saklamak için kullanılır.
 --
--- Depolama alanı:
--- Girilen karakter sayısına bağlı olarak yaklaşık 2 Byte x karakter sayısı kadar alan kullanır.
+-- Kullanım biçimi : NVARCHAR(n)
+-- Depolama alanı  : Girilen karakter sayısına bağlı olarak yaklaşık 2 Byte x karakter sayısı.
 --
--- Modern uygulamalarda Türkçe karakterler ve farklı dillerle uyumluluk sağlamak için VARCHAR yerine
--- çoğu zaman NVARCHAR tercih edilir.
+-- Modern uygulamalarda Türkçe karakterler ve farklı dillerle uyumluluk sağlamak için VARCHAR yerine çoğunlukla NVARCHAR tercih edilir.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Ad ve soyad
 -- - Adres
 -- - Ürün adı
 -- - Açıklama
 -- - Çok dilli kullanıcı girdileri
 --
--- Örnek:
--- ProductName NVARCHAR(100) olarak tanımlanırsa ürün adları Türkçe karakterlerle güvenli şekilde saklanabilir.
+-- Örnek: ProductName NVARCHAR(100) olarak tanımlanırsa ürün adları Türkçe karakterlerle güvenli şekilde saklanabilir.
 
 
-----------------
--- 2.6 NVARCHAR(MAX)
-----------------
-
--- NVARCHAR(MAX), büyük boyutlu Unicode metin verilerini saklamak için kullanılır.
+-- ## 2.6 NVARCHAR(MAX)
 --
--- Depolama kapasitesi:
--- Yaklaşık 2 GB'a kadar Unicode metin saklayabilir.
+-- Büyük boyutlu Unicode metin verilerini saklamak için kullanılır.
 --
--- Örnek kullanım alanları:
+-- Depolama kapasitesi : Yaklaşık 2 GB'a kadar Unicode metin.
+--
+-- Kullanım alanları:
 -- - Çok dilli uzun açıklamalar
 -- - Doküman içerikleri
 -- - API'den gelen büyük metinsel cevaplar
 -- - JSON verileri
 --
--- Örnek:
--- SQL Server'da JSON için ayrı bir native veri tipi bulunmadığından,
--- JSON içerikleri genellikle NVARCHAR(MAX) içinde saklanır.
+-- Örnek: SQL Server'da JSON için ayrı bir native veri tipi bulunmadığından, JSON içerikleri genellikle NVARCHAR(MAX) içinde saklanır.
 
 
 -----------------------------------------------------------------------------------------------
--- 3. DATE & TIME DATA TYPES
+-- # 3. TARİH & SAAT (DATE & TIME) VERİ TİPLERİ
 -----------------------------------------------------------------------------------------------
 
-----------------
--- 3.1 DATE
-----------------
-
--- DATE, yalnızca tarih bilgisini saklamak için kullanılır.
--- Saat bilgisi içermez.
+-- ## 3.1 DATE
 --
--- Depolama alanı : 3 Byte
--- Değer aralığı  : 0001-01-01 - 9999-12-31
+-- Yalnızca tarih bilgisini saklamak için kullanılır; saat bilgisi içermez.
 --
--- Örnek kullanım alanları:
+-- - Depolama alanı : 3 Byte
+-- - Değer aralığı  : 0001-01-01 - 9999-12-31
+--
+-- Kullanım alanları:
 -- - Doğum tarihi
 -- - İşe giriş tarihi
 -- - Sipariş tarihi
 -- - Fatura tarihi
 --
--- Örnek:
--- BirthDate DATE olarak tanımlandığında yalnızca yıl, ay ve gün bilgisi tutulur.
+-- Örnek: BirthDate DATE olarak tanımlandığında yalnızca yıl, ay ve gün bilgisi tutulur.
 
 
-----------------
--- 3.2 TIME
-----------------
-
--- TIME, yalnızca saat bilgisini saklamak için kullanılır.
--- Tarih bilgisi içermez.
+-- ## 3.2 TIME
 --
--- Depolama alanı : Hassasiyet düzeyine bağlı olarak 3-5 Byte
--- Değer aralığı  : 00:00:00 - 23:59:59.9999999
+-- Yalnızca saat bilgisini saklamak için kullanılır; tarih bilgisi içermez.
 --
--- Örnek kullanım alanları:
+-- - Depolama alanı : Hassasiyet düzeyine bağlı olarak 3-5 Byte
+-- - Değer aralığı  : 00:00:00 - 23:59:59.9999999
+--
+-- Kullanım alanları:
 -- - Vardiya başlangıç saati
 -- - Ders saati
 -- - Randevu saati
 -- - Gün içi işlem zamanı
 --
--- Örnek:
--- MeetingTime TIME olarak tanımlandığında yalnızca toplantının saat bilgisi saklanır.
+-- Örnek: MeetingTime TIME olarak tanımlandığında yalnızca toplantının saat bilgisi saklanır.
 
 
-----------------
--- 3.3 DATETIME
-----------------
-
--- DATETIME, tarih ve saat bilgisini birlikte saklamak için kullanılan veri tipidir.
+-- ## 3.3 DATETIME
 --
--- Depolama alanı : 8 Byte
--- Değer aralığı  : 1753-01-01 - 9999-12-31
+-- Tarih ve saat bilgisini birlikte saklar.
 --
--- Örnek kullanım alanları:
+-- - Depolama alanı : 8 Byte
+-- - Değer aralığı  : 1753-01-01 - 9999-12-31
+--
+-- Kullanım alanları:
 -- - Kayıt oluşturma zamanı
 -- - Sipariş oluşturulma zamanı
 -- - İşlem zamanı
 -- - Güncelleme zamanı
 --
--- Örnek:
--- CreatedAt DATETIME olarak tanımlanırsa bir kaydın hangi tarih ve saatte oluşturulduğu saklanabilir.
+-- Örnek: CreatedAt DATETIME olarak tanımlanırsa bir kaydın hangi tarih ve saatte oluşturulduğu saklanabilir.
 
 
-----------------
--- 3.4 SMALLDATETIME
-----------------
-
--- SMALLDATETIME, DATETIME veri tipine göre daha düşük hassasiyetli
--- tarih-saat bilgisi saklamak için kullanılır.
+-- ## 3.4 SMALLDATETIME
 --
--- Depolama alanı : 4 Byte
--- Hassasiyet     : Dakika düzeyi
+-- DATETIME'a göre daha düşük hassasiyetli (dakika düzeyinde) tarih-saat bilgisi saklar.
+--
+-- - Depolama alanı : 4 Byte
+-- - Hassasiyet     : Dakika düzeyi
 --
 -- Saniye veya milisaniye hassasiyetinin önemli olmadığı durumlarda tercih edilebilir.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Günlük raporlama zamanları
 -- - Dakika düzeyinde işlem kayıtları
 -- - Basit tarih-saat alanları
 
 
-----------------
--- 3.5 DATETIMEOFFSET
-----------------
-
--- DATETIMEOFFSET, tarih ve saat bilgisinin yanında saat dilimi farkını da saklayan veri tipidir.
+-- ## 3.5 DATETIMEOFFSET
 --
--- Özellik:
--- UTC offset bilgisini içerir.
+-- Tarih ve saat bilgisinin yanında saat dilimi farkını (UTC offset) da saklar.
 --
--- Örnek:
--- 2026-06-22 14:30:00 +03:00
+-- Örnek: 2026-06-22 14:30:00 +03:00
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Uluslararası uygulamalar
 -- - Farklı saat dilimlerinde çalışan sistemler
 -- - Global kullanıcı işlemleri
 -- - Zaman dilimi bilgisi kritik olan kayıtlar
 --
--- Örnek:
--- Türkiye, Avrupa ve Amerika kullanıcılarının işlem zamanlarının doğru yorumlanması gereken
--- sistemlerde DATETIMEOFFSET tercih edilebilir.
+-- Örnek: Türkiye, Avrupa ve Amerika kullanıcılarının işlem zamanlarının doğru yorumlanması gereken sistemlerde DATETIMEOFFSET tercih edilebilir.
 
 
 -----------------------------------------------------------------------------------------------
--- 4. BOOLEAN DATA TYPES (true / false)
+-- # 4. MANTIKSAL (BOOLEAN) VERİ TİPLERİ
 -----------------------------------------------------------------------------------------------
 
-----------------
--- 4.1 BIT (0, 1, NULL)
-----------------
-
--- BIT, mantıksal değerleri saklamak için kullanılan veri tipidir.
+-- ## 4.1 BIT (0, 1, NULL)
 --
--- Alabileceği değerler:
--- 0, 1 veya NULL
+-- Mantıksal değerleri saklamak için kullanılır. Alabileceği değerler: 0, 1 veya NULL.
 --
--- SQL Server'da ayrı bir BOOLEAN veri tipi bulunmaz.
--- Boolean benzeri değerler genellikle BIT veri tipi ile temsil edilir.
+-- SQL Server'da ayrı bir BOOLEAN veri tipi bulunmaz; boolean benzeri değerler genellikle BIT veri tipi ile temsil edilir.
 --
--- Örnek kullanım alanları:
--- - Aktif / pasif durumu
--- - Silindi / silinmedi bilgisi
--- - Onaylandı / onaylanmadı bilgisi
--- - E-posta doğrulandı mı?
+-- Kullanım alanları:
+-- - Aktif/pasif durumu
+-- - Silindi/silinmedi bilgisi
+-- - Onaylandı/onaylanmadı bilgisi
+-- - E-posta doğrulama durumu
 --
--- Örnek:
--- IsActive BIT kolonu, bir kullanıcının aktif olup olmadığını göstermek için kullanılabilir.
---
--- 1 : Aktif
--- 0 : Pasif
--- NULL : Bilinmiyor veya henüz belirlenmemiş
+-- Örnek: IsActive BIT kolonu bir kullanıcının aktif olup olmadığını gösterir.
+-- - 1    : Aktif
+-- - 0    : Pasif
+-- - NULL : Bilinmiyor veya henüz belirlenmemiş
 
 
 -----------------------------------------------------------------------------------------------
--- 5. BINARY DATA TYPES
+-- # 5. İKİLİ (BINARY) VERİ TİPLERİ
 -----------------------------------------------------------------------------------------------
 
-----------------
--- 5.1 BINARY
-----------------
-
--- BINARY, sabit uzunluklu ikili verileri saklamak için kullanılır.
+-- ## 5.1 BINARY
 --
--- Kullanım biçimi:
--- BINARY(n)
+-- Sabit uzunluklu ikili verileri saklamak için kullanılır.
 --
--- Depolama alanı:
--- Her zaman n Byte alan kullanır.
+-- Kullanım biçimi : BINARY(n)
+-- Depolama alanı  : Her zaman n Byte.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Sabit uzunluklu hash değerleri
 -- - Şifrelenmiş sabit boyutlu alanlar
 -- - Binary formatta saklanan özel kodlar
 --
--- Örnek:
--- Uzunluğu her zaman aynı olan bir hash değeri BINARY veri tipiyle saklanabilir.
+-- Örnek: Uzunluğu her zaman aynı olan bir hash değeri BINARY ile saklanabilir.
 
 
-----------------
--- 5.2 VARBINARY
-----------------
-
--- VARBINARY, değişken uzunluklu ikili verileri saklamak için kullanılır.
+-- ## 5.2 VARBINARY
 --
--- Kullanım biçimi:
--- VARBINARY(n)
+-- Değişken uzunluklu ikili verileri saklamak için kullanılır.
 --
--- Depolama alanı:
--- Gerçek veri uzunluğuna göre alan kullanır.
+-- Kullanım biçimi : VARBINARY(n)
+-- Depolama alanı  : Gerçek veri uzunluğuna göre.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Değişken uzunluklu hash çıktıları
 -- - Küçük dosya parçaları
 -- - Şifrelenmiş veri blokları
 --
--- Örnek:
--- Farklı uzunluklarda şifrelenmiş veri çıktıları VARBINARY ile saklanabilir.
+-- Örnek: Farklı uzunluklarda şifrelenmiş veri çıktıları VARBINARY ile saklanabilir.
 
 
-----------------
--- 5.3 VARBINARY(MAX)
-----------------
-
--- VARBINARY(MAX), büyük boyutlu ikili verileri saklamak için kullanılır.
+-- ## 5.3 VARBINARY(MAX)
 --
--- Depolama kapasitesi:
--- Yaklaşık 2 GB'a kadar veri saklayabilir.
+-- Büyük boyutlu ikili verileri saklamak için kullanılır.
 --
--- Örnek kullanım alanları:
+-- Depolama kapasitesi : Yaklaşık 2 GB'a kadar.
+--
+-- Kullanım alanları:
 -- - Dosyalar
 -- - Resimler
 -- - PDF belgeleri
 -- - Medya içerikleri
 --
--- Örnek:
--- Bir kullanıcının profil fotoğrafı veya sisteme yüklenen PDF dosyası VARBINARY(MAX) içinde
--- saklanabilir.
+-- Örnek: Bir kullanıcının profil fotoğrafı veya sisteme yüklenen PDF dosyası VARBINARY(MAX) içinde saklanabilir.
 --
--- Not:
--- Büyük dosyaların doğrudan veritabanında saklanması performans ve bakım maliyeti oluşturabilir.
--- Bu nedenle dosya yolu saklama veya harici depolama çözümleri de değerlendirilmelidir.
+-- Not: Büyük dosyaların doğrudan veritabanında saklanması performans ve bakım maliyeti oluşturabilir; bu nedenle dosya yolu saklama veya harici depolama çözümleri de değerlendirilmelidir.
 
 
-
--- BOOLEAN / BIT / BINARY farkları
-
--- BOOLEAN → Mantıksal kavram → true / false
--- BIT     → SQL Server’da boolean benzeri veri saklamak için kullanılır → 0 / 1 / NULL
--- BINARY  → Ham ikili veri saklamak için kullanılır → dosya, hash, şifreli veri vb.
-
--- Ham ikili veri saklamak, veriyi insanın doğrudan okuyabileceği biçimde değil,
--- bilgisayarın işlediği düşük seviyeli byte formatında saklamaktır.
--- Basit benzetme → Metin veri = "Onur"
+-- ## BOOLEAN / BIT / BINARY Farkları
+--
+-- - BOOLEAN → Mantıksal kavram → true / false
+-- - BIT     → SQL Server'da boolean benzeri veri saklamak için kullanılır → 0 / 1 / NULL
+-- - BINARY  → Ham ikili veri saklamak için kullanılır → dosya, hash, şifreli veri vb.
+--
+-- Ham ikili veri saklamak, veriyi insanın doğrudan okuyabileceği biçimde değil, bilgisayarın işlediği düşük seviyeli byte formatında saklamak anlamına gelir (örn. metin veri "Onur" iken, ham ikili veri onun byte düzeyindeki karşılığıdır).
 
 
 -----------------------------------------------------------------------------------------------
--- 6. SPECIAL PURPOSE DATA TYPES
+-- # 6. ÖZEL AMAÇLI (SPECIAL PURPOSE) VERİ TİPLERİ
 -----------------------------------------------------------------------------------------------
 
-----------------
--- 6.1 UNIQUEIDENTIFIER
-----------------
-
--- UNIQUEIDENTIFIER, GUID (Globally Unique Identifier) değerlerini saklamak amacıyla
--- kullanılan veri tipidir.
+-- ## 6.1 UNIQUEIDENTIFIER
 --
--- Depolama alanı:
--- 16 Byte
+-- GUID (Globally Unique Identifier) değerlerini saklamak için kullanılır.
+--
+-- Depolama alanı : 16 Byte
 --
 -- GUID, global ölçekte benzersiz değer üretmek için kullanılır.
--- Özellikle dağıtık sistemlerde, farklı sunucularda veya farklı uygulamalarda üretilen kayıtların
--- çakışmadan tanımlanmasını sağlar.
+-- Özellikle dağıtık sistemlerde, farklı sunucularda veya farklı uygulamalarda üretilen kayıtların çakışmadan tanımlanmasını sağlar.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Dağıtık sistemlerde benzersiz kayıt kimliği
 -- - Sistemler arası veri entegrasyonu
 -- - Global müşteri veya işlem ID değerleri
 --
--- Örnek:
--- Birden fazla şubede aynı anda müşteri kaydı oluşturulan bir sistemde,
--- çakışma riskini azaltmak için UNIQUEIDENTIFIER kullanılabilir.
+-- Örnek: Birden fazla şubede aynı anda müşteri kaydı oluşturulan bir sistemde, çakışma riskini azaltmak için UNIQUEIDENTIFIER kullanılabilir.
 --
--- Not:
--- UNIQUEIDENTIFIER benzersizlik açısından güçlüdür;
--- ancak indeksleme ve sıralı veri ekleme performansı açısından dikkatli kullanılmalıdır.
+-- Not: UNIQUEIDENTIFIER benzersizlik açısından güçlüdür; ancak indeksleme ve sıralı veri ekleme performansı açısından dikkatli kullanılmalıdır.
 
 
-----------------
--- 6.2 XML
-----------------
-
--- XML, “Extensible Markup Language” ifadesinin kısaltmasıdır Türkçeye "Genişletilebilir İşaretleme Dili" olarak çevrilir.
--- XML, veriyi etiketler kullanarak düzenli ve hiyerarşik biçimde saklamak veya sistemler arasında
--- taşımak için kullanılan metin tabanlı bir veri formatıdır.
+-- ## 6.2 XML
+--
+-- "Extensible Markup Language" (Genişletilebilir İşaretleme Dili) ifadesinin kısaltmasıdır.
+-- Veriyi etiketler kullanarak düzenli ve hiyerarşik biçimde saklamak veya sistemler arasında taşımak için kullanılan metin tabanlı bir veri formatıdır.
 -- HTML görünümü tanımlarken, XML verinin yapısını ve anlamını tanımlar.
 --
--- SQL Server XML verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına destek verir.
+-- SQL Server, XML verileri üzerinde sorgulama yapılmasına ve XML indeksleri oluşturulmasına destek verir.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - Konfigürasyon verileri
 -- - Hiyerarşik veri yapıları
 -- - Sistemler arası XML tabanlı veri aktarımı
 -- - Eski entegrasyon sistemleri
 --
--- Örnek:
--- Bir siparişin ürün listesi, teslimat bilgileri ve ek açıklamaları hiyerarşik bir XML formatında saklanabilir.
+-- Örnek: Bir siparişin ürün listesi, teslimat bilgileri ve ek açıklamaları hiyerarşik bir XML formatında saklanabilir.
 
 
-----------------
--- 6.3 JSON
-----------------
-
--- JSON, “JavaScript Object Notation” ifadesinin kısaltmasıdır.
--- JSON, veriyi anahtar-değer çiftleri halinde saklamak ve sistemler arasında taşımak için kullanılan
--- metin tabanlı bir veri formatıdır.
--- Özellikle web uygulamalarında, API cevaplarında ve yapılandırma dosyalarında yaygın olarak
--- kullanılır.
+-- ## 6.3 JSON
+--
+-- "JavaScript Object Notation" ifadesinin kısaltmasıdır.
+-- Veriyi anahtar-değer çiftleri halinde saklamak ve sistemler arasında taşımak için kullanılan metin tabanlı bir veri formatıdır.
+-- Özellikle web uygulamalarında, API cevaplarında ve yapılandırma dosyalarında yaygın olarak kullanılır.
+--
 -- Basit örnek:
-
 -- {
 --   "id": 1,
 --   "name": "Onur",
 --   "city": "Istanbul"
 -- }
-
--- SQL Server'da JSON için ayrı bir native veri tipi bulunmaz.
--- JSON verileri genellikle NVARCHAR veya NVARCHAR(MAX) veri tipi içinde saklanır.
 --
--- JSON, esnek yapılı ve yarı yapılandırılmış verileri saklamak için yaygın olarak kullanılır.
+-- SQL Server'da JSON için ayrı bir native veri tipi bulunmaz; JSON verileri genellikle NVARCHAR veya NVARCHAR(MAX) veri tipi içinde saklanır.
 -- SQL Server, JSON metinleri üzerinde sorgulama ve işleme yapabilmek için çeşitli JSON fonksiyonları sunar.
 --
--- Örnek kullanım alanları:
+-- Kullanım alanları:
 -- - API cevapları
 -- - Esnek şemaya sahip kullanıcı ayarları
 -- - Uygulama konfigürasyonları
 -- - Yarı yapılandırılmış veri alanları
 --
--- Örnek:
--- Bir kullanıcının tema tercihi, bildirim ayarları ve dil seçimi JSON formatında tek bir NVARCHAR(MAX)
--- kolonunda saklanabilir.
+-- Örnek: Bir kullanıcının tema tercihi, bildirim ayarları ve dil seçimi JSON formatında tek bir NVARCHAR(MAX) kolonunda saklanabilir.
 --
--- Not:
--- JSON verisi metin olarak saklandığından, veri doğrulama,
--- indeksleme ve performans gereksinimleri tasarım aşamasında ayrıca değerlendirilmelidir.
+-- Not: JSON verisi metin olarak saklandığından, veri doğrulama, indeksleme ve performans gereksinimleri tasarım aşamasında ayrıca değerlendirilmelidir.
